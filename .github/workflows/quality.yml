@@ -1,0 +1,23 @@
+name: Scaffold quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-and-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Governance and repository structure (CPU/static)
+        run: python scripts/validate_repository.py
+      - name: Synthetic unit tests only (no datasets or GPU)
+        run: python -m unittest discover -s tests -v

@@ -1,0 +1,165 @@
+{
+  "schema_version": "motpt-governance-v1",
+  "project_id": "MOTPT",
+  "repository": "yiliang959/MOTPT",
+  "generation": 1,
+  "repository_visibility": "PUBLIC",
+  "roles": {
+    "project_owner": "Project Owner",
+    "tier1_scientific_escalation": "Owner-invoked independent review (optional)",
+    "tier2_scientific_lead": "Scientific contract/review",
+    "tier3_implementation": "Authorized implementation agent"
+  },
+  "authority": {
+    "order": [
+      "EXPLICIT_PROJECT_OWNER_DECISION",
+      "governance.json",
+      "docs/RESEARCH.md",
+      "docs/EVIDENCE.md",
+      "docs/CURRENT.md",
+      "ACTIVE_ISSUE_PR_IF_ANY"
+    ],
+    "repository_is_authoritative": true,
+    "chat_is_authority": false,
+    "owner_releases_required_for": [
+      "RESEARCH_CONTRACT_FREEZE",
+      "NEW_MODEL_GENERATION",
+      "DATASET_SPLIT_OR_EVALUATION_CHANGE",
+      "SCIENTIFIC_EXECUTION",
+      "OFFICIAL_TEST",
+      "PUBLICATION_CLAIM",
+      "CROSS_REPOSITORY_IMPORT"
+    ]
+  },
+  "knowledge": {
+    "startup_read_order": [
+      "governance.json",
+      "AGENTS.md",
+      "docs/RESEARCH.md",
+      "docs/EVIDENCE.md",
+      "docs/CURRENT.md",
+      "ACTIVE_ISSUE_PR_IF_ANY"
+    ],
+    "canonical_update_in_place": true,
+    "no_duplicate_latest_status_or_handoff_stack": true
+  },
+  "science": {
+    "research_hypothesis": "UNDEFINED__OWNER_DISCUSSION_PENDING",
+    "scientific_contract": "UNFROZEN",
+    "model_architecture": "NONE",
+    "training_objective": "NONE",
+    "accepted_model": "NONE",
+    "native_baseline": "MOTIP__PLANNED__NOT_YET_MOTPT_PARITY_VALIDATED",
+    "candidate_upstream": "MCG-NJU/MOTIP@ffc0e905ac196a603027eca8d18fb0dff48c8bcc__CANDIDATE_NOT_FROZEN",
+    "datasets_and_splits": "TBD__NO_EXPERIMENT_AUTHORITY",
+    "strictly_causal_online_as_default_research_guard": true,
+    "gt_future_test_role": "NOT_MODEL_VISIBLE__EXPLICIT_CONTRACT_REQUIRED",
+    "cross_repo_scientific_conclusion_inheritance": false
+  },
+  "execution": {
+    "state": "HOLD__BOOTSTRAP_ONLY__AWAIT_OWNER_SCIENTIFIC_CONTRACT",
+    "allowed_now": [
+      "DOCS_AND_GOVERNANCE",
+      "PURE_CPU_STATIC_VALIDATION",
+      "UNIT_TESTS_WITH_SYNTHETIC_INPUTS",
+      "NO_DATASET_PROVENANCE_REVIEW"
+    ],
+    "denied_until_separately_released": [
+      "DATASET_CONSUMING_ANALYSIS",
+      "NATIVE_MODEL_FORWARD",
+      "GPU_MODEL_FORWARD",
+      "OPTIMIZER_STEP",
+      "TRAINING",
+      "ONLINE_VAL_INFERENCE",
+      "OFFICIAL_VAL_TRACKEVAL",
+      "OFFICIAL_TEST",
+      "ORACLE_TO_RUNTIME_PROMOTION",
+      "MODEL_ARCHITECTURE_IMPLEMENTATION"
+    ],
+    "default_deny_unlisted_operations": true,
+    "release_must_be_task_dataset_split_operation_scoped": true,
+    "change_requires_owner_decision_and_tracked_control_plane": true
+  },
+  "workflow": {
+    "research_unit": "ONE_ACTIVE_ISSUE_BRANCH_DRAFT_PR_PER_RESEARCH_GENERATION",
+    "governance_workstream_may_be_separate": true,
+    "current_active_research_issue": null,
+    "current_active_research_branch": null,
+    "current_active_research_pr": null,
+    "review": "GATE_BASED_NOT_PER_COMMIT",
+    "gates": [
+      "G0_OWNER_T2_SCIENTIFIC_CONTRACT_FREEZE",
+      "G1_T3_IMPLEMENTATION_SELF_AUDIT_CPU_TESTS",
+      "G2_OWNER_AUTHORIZED_PARITY_CANARY",
+      "G3_SEPARATELY_AUTHORIZED_TRAIN_VAL",
+      "G4_T2_SCIENTIFIC_ADJUDICATION",
+      "G5_OWNER_REVIEW_MERGE_CLOSE_BRANCH_CLEANUP"
+    ],
+    "no_unreviewed_force_push_on_shared_branches": true,
+    "delete_merged_workstream_branches": true,
+    "scientific_hypothesis_before_model_code": true
+  },
+  "provenance": {
+    "record_at_least": [
+      "source_repo_and_commit",
+      "dataset_and_official_split",
+      "config_and_checkpoint_hash_if_used",
+      "input_artifact_hash",
+      "code_commit",
+      "evaluator_protocol",
+      "output_hash_or_immutable_reference"
+    ],
+    "labels": [
+      "FACT",
+      "SUPPORTED_INFERENCE",
+      "OPEN_HYPOTHESIS"
+    ],
+    "same_observation_not_independent_replication": true,
+    "oracle_labels_not_runtime_input": true,
+    "persistent_tracker_id_distinct_from_recyclable_id_label": true
+  },
+  "cross_repository": {
+    "other_project": "TCR_MOT_tmp_V2",
+    "same_motip_baseline_allowed_after_independent_pin": true,
+    "shareable_categories": [
+      "MOT_IO",
+      "EVALUATION_ORCHESTRATION",
+      "FAILURE_CASE_SCHEMA",
+      "NATIVE_RECORDER_AFTER_PARITY_REVIEW",
+      "GENERIC_PROVENANCE_UTILS",
+      "GENERAL_GOVERNANCE_PATTERNS"
+    ],
+    "not_inherited": [
+      "SCIENTIFIC_HYPOTHESIS",
+      "ACCEPTED_RESULTS",
+      "MODEL_ARCHITECTURE",
+      "TRAINING_POLICY",
+      "EXECUTION_PERMISSIONS",
+      "OWNER_DECISIONS"
+    ],
+    "no_runtime_import_from_other_repo": true,
+    "private_to_public_review_required": true,
+    "license_and_secret_check_required": true,
+    "copy_only_minimal_independently_reviewed_files": true
+  },
+  "repository_layout": {
+    "roots": [
+      "docs/",
+      "motpt/",
+      "scripts/",
+      "tests/",
+      "optional_external/"
+    ],
+    "third_party": "PINNED_AND_LICENSE_REVIEWED_WHEN_ACTUALLY_REQUIRED",
+    "never_commit_large_or_local": [
+      "datasets/",
+      "data/",
+      "outputs/",
+      "checkpoints/",
+      "artifacts/",
+      "logs/",
+      ".project_storage/"
+    ],
+    "accepted_small_evidence": "docs/results/<workstream>/__T2_REVIEWED"
+  }
+}

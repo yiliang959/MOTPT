@@ -1,0 +1,36 @@
+# Local environments and Python outputs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode/
+.idea/
+
+# Large/local research material — never version
+/data/
+/datasets/
+/outputs/
+/analysis_output/
+/failure_inventory/
+/artifacts/
+/checkpoints/
+/logs/
+/cache/
+/tmp/
+/.project_storage/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+*.mp4
+*.avi
+
+# Maintain tiny accepted audit summaries in docs/results only after review.
