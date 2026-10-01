@@ -1,6 +1,6 @@
 # MOTPT — Research Contract / Living v0 Formulation
 
-\`\`\`text
+```text
 STATUS = V0_CONCEPT_OWNER_ACCEPTED__G0_DISCUSSION_ACTIVE
 RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0
 FORMAL_PROBLEM = WORKING_FORMULATION__NOT_FINAL_G0_FREEZE
@@ -8,7 +8,7 @@ ARCHITECTURE = MINIMAL_FOUR_OPERATION_DATAFLOW__NOT_FROZEN
 TRAINING_OBJECTIVE = TBD
 PROPOSED_MODEL_VERSION = NONE
 SCIENTIFIC_EXECUTION = HOLD
-\`\`\`
+```
 
 > **Authority note.** The Project Owner approved this v0 direction for tracked research discussion on 2026-10-01. This document is now the canonical living formulation, but it is **not** the final G0 scientific-contract freeze and does not authorize model implementation or benchmark execution. Definitions, notation, module boundaries, representations and hypotheses may be revised as survey and analysis progress.
 
@@ -232,7 +232,7 @@ If no usable observation is assigned, the predicted belief can persist subject t
 
 ## 7. Working architecture sketch
 
-\`\`\`text
+```text
 Persistent object belief B(t-1)
             |
             v
@@ -254,7 +254,7 @@ current observations -> Observation Encoder
                         B(t)
                          |
                          +------> next frame
-\`\`\`
+```
 
 This is a **scientific dataflow sketch**, not an implementation contract.
 

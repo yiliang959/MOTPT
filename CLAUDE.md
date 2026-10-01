@@ -1,6 +1,6 @@
 # MOTPT agent entrypoint
 
-Read in this order: \`governance.json\` → \`AGENTS.md\` → \`docs/RESEARCH.md\` → \`docs/EVIDENCE.md\` → \`docs/CURRENT.md\` → active Issue / PR.
+Read in this order: `governance.json` → `AGENTS.md` → `docs/RESEARCH.md` → `docs/EVIDENCE.md` → `docs/CURRENT.md` → active Issue / PR.
 
 This file is only a pointer, never independent project authority.
 

@@ -1,6 +1,6 @@
 # MOTPT — Canonical Current State
 
-\`\`\`text
+```text
 STATE_ID = MOTPT-G1-20261001-V0-FORMULATION-DISCUSSION
 REPOSITORY = yiliang959/MOTPT
 ACTIVE_BRANCH = research/1-motpt-v0-formulation
@@ -21,7 +21,7 @@ TRAINING = PROHIBITED
 ONLINE_VAL_INFERENCE = PROHIBITED
 OFFICIAL_VAL_TRACKEVAL = PROHIBITED
 OFFICIAL_TEST = PROHIBITED_UNTIL_SEPARATELY_AUTHORIZED
-\`\`\`
+```
 
 ## Active workstream
 
@@ -29,22 +29,22 @@ Issue #1 tracks the living v0 formulation. The Owner approved writing the curren
 
 Current core:
 
-\`\`\`text
+```text
 persistent object belief
     -> MTP predictive transition
     -> current observation
     -> predictive association
     -> belief correction
     -> next frame
-\`\`\`
+```
 
 MTP is treated as a predictive tool **inside** MOT. MOTPT does not impose a fixed observation window; each object's belief is recursively maintained across its tracked lifetime.
 
 ## Current scientific status
 
-The formulation in \`docs/RESEARCH.md\` is accepted as the canonical **working concept**, not a final method or validated claim.
+The formulation in `docs/RESEARCH.md` is accepted as the canonical **working concept**, not a final method or validated claim.
 
-No dataset, model implementation, training objective, evaluation population or acceptance threshold is yet frozen. \`docs/EVIDENCE.md\` remains empty of accepted MOTPT scientific results.
+No dataset, model implementation, training objective, evaluation population or acceptance threshold is yet frozen. `docs/EVIDENCE.md` remains empty of accepted MOTPT scientific results.
 
 ## Next decisions before G0 freeze
 

@@ -2,11 +2,11 @@
 
 ## 1. Mandatory read order
 
-1. \`governance.json\`
-2. \`AGENTS.md\`
-3. \`docs/RESEARCH.md\`
-4. \`docs/EVIDENCE.md\`
-5. \`docs/CURRENT.md\`
+1. `governance.json`
+2. `AGENTS.md`
+3. `docs/RESEARCH.md`
+4. `docs/EVIDENCE.md`
+5. `docs/CURRENT.md`
 6. The single active research Issue / Draft PR.
 
 Authority priority: explicit Project Owner decision > tracked governance > scientific contract > accepted evidence > current control plane > active Issue/PR. Chat memory and a repository name are not scientific authority. Update canonical files **in place**, not in dated handoffs or parallel "latest" files.
@@ -15,7 +15,7 @@ Authority priority: explicit Project Owner decision > tracked governance > scien
 
 MOTPT is independent of TCR-MOT. Native MOTIP may be a common baseline. Matching source/dataset/failure cases does not imply matching research hypotheses, designs, scientific verdicts, or execution permission.
 
-The Owner has approved the **v0 latent-flow-belief formulation for repository discussion and iterative refinement**. It is canonical working research context in \`docs/RESEARCH.md\`, but is **not** a final G0 method freeze. Do not invent representation, modules, losses, datasets or claims beyond the recorded working formulation.
+The Owner has approved the **v0 latent-flow-belief formulation for repository discussion and iterative refinement**. It is canonical working research context in `docs/RESEARCH.md`, but is **not** a final G0 method freeze. Do not invent representation, modules, losses, datasets or claims beyond the recorded working formulation.
 
 ## 3. Current execution authority: HOLD
 
@@ -23,15 +23,15 @@ During the G0 discussion phase you may modify research/governance docs, perform 
 
 No experimental Native/GPU forward, optimizer, training, dataset/VAL/TEST analysis or TrackEval, model implementation, or publication claim is authorized. A generic chat approval, borrowed TCR control-plane key, completed CI, or acceptance of the v0 concept is not execution authority.
 
-Later releases require exact workstream, operation, dataset/split/population, checkpoint/config, allowed outputs and stop conditions in tracked \`governance.json\` + \`docs/CURRENT.md\`, plus explicit Project Owner authorization. Official TEST is independently approved.
+Later releases require exact workstream, operation, dataset/split/population, checkpoint/config, allowed outputs and stop conditions in tracked `governance.json` + `docs/CURRENT.md`, plus explicit Project Owner authorization. Official TEST is independently approved.
 
 ## 4. Information and evidence boundary
 
-Separate \`MODEL_VISIBLE\`, \`SUPERVISION_ONLY\`, \`ANALYSIS_ONLY\`, and \`EVALUATOR_ONLY\`. Runtime uses current-frame information and strictly causal state only by default; GT, future information, oracle mappings, TrackEval states and private cross-repo evidence must not enter runtime inputs.
+Separate `MODEL_VISIBLE`, `SUPERVISION_ONLY`, `ANALYSIS_ONLY`, and `EVALUATOR_ONLY`. Runtime uses current-frame information and strictly causal state only by default; GT, future information, oracle mappings, TrackEval states and private cross-repo evidence must not enter runtime inputs.
 
-Keep persistent output tracker IDs separate from recyclable MOTIP \`id_label\` slots. A detector-vs-GT overlap diagnostic is not automatically an IDSW, and GT annotations are not a complete continuous physical trajectory.
+Keep persistent output tracker IDs separate from recyclable MOTIP `id_label` slots. A detector-vs-GT overlap diagnostic is not automatically an IDSW, and GT annotations are not a complete continuous physical trajectory.
 
-Label findings \`FACT\`, \`SUPPORTED_INFERENCE\`, \`OPEN_HYPOTHESIS\`, or \`WORKING_FORMULATION\`. A working formulation is an Owner-approved research direction, not empirical evidence.
+Label findings `FACT`, `SUPPORTED_INFERENCE`, `OPEN_HYPOTHESIS`, or `WORKING_FORMULATION`. A working formulation is an Owner-approved research direction, not empirical evidence.
 
 ## 5. Tier division
 
@@ -52,15 +52,15 @@ New model versions require a material scientific change and explicit freeze. Dia
 
 ## 7. Cross-repository reuse / public hygiene
 
-See \`docs/CROSS_REPO_REUSE.md\`. Never directly import TCR modules at MOTPT runtime, mirror an entire TCR tree, or treat historical TCR results as MOTPT-accepted evidence.
+See `docs/CROSS_REPO_REUSE.md`. Never directly import TCR modules at MOTPT runtime, mirror an entire TCR tree, or treat historical TCR results as MOTPT-accepted evidence.
 
 Port only minimal general utilities after reviewing exact source SHA, behavior/parity tests, license, dependencies and public-release risk. MOTPT is PUBLIC: exclude private annotations, personal/server paths, tokens, raw datasets, private evidence, checkpoints and large artifacts.
 
 ## 8. Working-tree discipline
 
-Use \`motpt/\` for reusable Python, \`scripts/\` for thin entrypoints, \`tests/\` for regressions and \`docs/\` for canonical knowledge.
+Use `motpt/` for reusable Python, `scripts/` for thin entrypoints, `tests/` for regressions and `docs/` for canonical knowledge.
 
-Do not create model/training implementation before the final G0 contract and explicit implementation release. Research diagrams/pseudocode in \`docs/RESEARCH.md\` do not grant implementation permission.
+Do not create model/training implementation before the final G0 contract and explicit implementation release. Research diagrams/pseudocode in `docs/RESEARCH.md` do not grant implementation permission.
 
 ## 9. Stop conditions
 
