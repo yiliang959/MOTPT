@@ -338,3 +338,9 @@ Still unresolved:
 - exact novelty claims after deeper literature review.
 
 No scientific execution is authorized until these are narrowed into a separate explicit G0 freeze.
+
+## 14. Literature survey and novelty tracking
+
+The living nearest-neighbor survey is maintained in [literature/README.md](literature/README.md), with a cross-paper [novelty/collision matrix](literature/NOVELTY_MATRIX.md) and per-paper extraction notes under `docs/literature/papers/`.
+
+The survey is supporting analysis, not accepted scientific evidence. If a literature note conflicts with this research contract, update the contract only through the tracked research workstream rather than silently treating the note as authority.

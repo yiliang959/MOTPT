@@ -74,3 +74,7 @@ Not authorized: dataset-consuming experiments, Native/GPU model forward, optimiz
 python scripts/validate_repository.py
 python -m unittest discover -s tests -v
 ```
+
+## Literature survey
+
+The research-specific survey lives at [docs/literature/README.md](docs/literature/README.md). It includes a novelty/collision matrix and per-paper notes focused on what MOTPT can reuse and what it must do differently.

@@ -10,7 +10,7 @@ CURRENT_RESEARCH_CONTRACT = V0_CONCEPT_OWNER_ACCEPTED__NOT_G0_FROZEN
 CURRENT_RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0
 CURRENT_ACCEPTED_MODEL = NONE
 BASELINE = MOTIP_PLANNED__NOT_MOTPT_VALIDATED
-CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS
+CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS\nLITERATURE_LAYER = docs/literature/README.md__18_CORE_PAPERS
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -56,3 +56,7 @@ No dataset, model implementation, training objective, evaluation population or a
 6. freeze one minimal implementable contract before any scientific execution.
 
 Until then, literature review, docs/governance edits and synthetic/static tests are allowed; benchmark-consuming research execution is not.
+
+## Literature layer
+
+The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 18 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
