@@ -102,7 +102,7 @@
     "governance_workstream_may_be_separate": true,
     "current_active_research_issue": 1,
     "current_active_research_branch": "research/1-motpt-v0-formulation",
-    "current_active_research_pr": null,
+    "current_active_research_pr": 2,
     "review": "GATE_BASED_NOT_PER_COMMIT",
     "gates": [
       "G0_OWNER_T2_FINAL_SCIENTIFIC_CONTRACT_FREEZE",
