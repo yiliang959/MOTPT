@@ -449,3 +449,190 @@ The experiment is considered informative only if it can separate:
 - the target MOTPT mechanism: **persistent belief + predictive feedback + observation-driven same-future refinement**.
 
 A gain over Native MOTIP alone is insufficient, because recent work already shows that generic temporal fusion, discriminative temporal embeddings and distributional motion hypotheses can improve tracking.
+
+
+## 17. Model generation and validation-iteration policy
+
+MOTPT is expected to require multiple model generations and multiple validation rounds. These identities must be planned explicitly so scientific changes are not confused with tuning/debug runs.
+
+### 17.1 Four-level identity
+
+```text
+Model Generation  = M#
+Validation Iteration = V##
+Execution Run = R####
+Evidence Question = E###
+```
+
+These levels have different meanings.
+
+### Model Generation — `M#`
+
+A new `M#` is created **only for a material scientific change**.
+
+Examples that require a new model generation:
+
+- changing model-visible information or causal boundary;
+- changing the semantic belief representation family;
+- adding/removing a core module or feedback path;
+- changing MTP from one scientific role to another;
+- adding/removing supervision or a loss term that changes the scientific objective;
+- changing observation-assimilation semantics;
+- changing identity/existence factorization in a way that changes the hypothesis being tested.
+
+Examples that do **not** by themselves create a new model generation:
+
+- seed;
+- learning rate;
+- batch size;
+- hidden dimension;
+- number of epochs;
+- checkpoint choice within the same contract;
+- logging;
+- bug fix that restores the frozen contract;
+- evaluator-only diagnostics;
+- prediction horizon or retention threshold explored under the same model semantics;
+- changing a loss weight while retaining the same objective terms.
+
+### Validation Iteration — `V##`
+
+A validation iteration is a **promoted configuration/evaluation round within one model generation**.
+
+Use a new `V##` when the scientific model is unchanged but a configuration is intentionally promoted for comparison, for example:
+
+- candidate prediction horizon;
+- number of future modes;
+- belief capacity;
+- retention threshold;
+- calibrated feedback strength;
+- optimizer/training schedule selected for an endpoint comparison;
+- a revised but semantically identical training recipe.
+
+Do **not** create a new `V##` for every debug/tuning run. Exploratory runs remain ordinary `R####` executions until a configuration is promoted.
+
+### Execution Run — `R####`
+
+Every actual execution gets an immutable run identity.
+
+A run binds at least:
+
+- `M#`;
+- optional `V##`;
+- code Git SHA;
+- config hash;
+- checkpoint/input hashes;
+- dataset/split/population;
+- seed;
+- evaluator;
+- output artifact reference/hash.
+
+Repeated seeds and reruns are separate `R####`, not new model versions.
+
+### Evidence Question — `E###`
+
+`E###` lives only in `docs/EVIDENCE.md` and represents a scientific question/adjudicated comparison.
+
+Multiple model generations, validation iterations and runs can contribute to one evidence entry.
+
+Example:
+
+```text
+E003 — Does persistent predictive belief improve association after re-observation?
+
+  B0 / R0041
+  C2 / R0042-R0044
+  C3 / R0045-R0047
+  M1-V02 / R0050-R0054
+```
+
+The evidence identity must not equal the run identity.
+
+### 17.2 Baseline and control identities
+
+Baseline/control variants use separate namespaces and do not consume MOTPT model-generation numbers:
+
+```text
+B0 = Native MOTIP
+
+C1 = Temporal-memory-only control
+C2 = Deterministic future predictor
+C3 = Fixed-window multimodal predictor
+C4 = Multimodal prediction without MOT feedback
+```
+
+The first target MOTPT scientific generation is reserved as:
+
+```text
+M1 = Persistent predictive belief
+     + multimodal MTP prediction
+     + predictive feedback to MOT
+     + observation-driven belief refinement
+```
+
+`M1` is **reserved, not implemented or accepted**. Its exact representation/loss remains subject to final G0 freeze.
+
+Do not pre-name `M2`, `M3`, etc. A later generation exists only after evidence motivates a material scientific change.
+
+### 17.3 Promotion rule
+
+The normal lifecycle is:
+
+```text
+idea / debug runs
+    -> promoted V## within current M#
+    -> controlled primary-dataset evaluation
+    -> falsification / matched controls
+    -> secondary-dataset validation
+    -> evidence adjudication
+    -> ACCEPT / REVISE / KILL
+```
+
+A poor result does **not** automatically justify a new model generation.
+
+Before creating `M(n+1)`, state:
+
+1. what evidence falsified or limited `Mn`;
+2. what scientific mechanism changes;
+3. why the change cannot be represented as another `V##`;
+4. which prior controls must be rerun;
+5. which evidence entry will adjudicate the new generation.
+
+### 17.4 Git is provenance, not model identity
+
+Do not use branch names, commit numbers, checkpoint filenames or Markdown copies as the model-version system.
+
+Correct:
+
+```text
+M1-V02 / R0051
+code_sha = <git SHA>
+config_hash = <hash>
+checkpoint_hash = <hash>
+```
+
+Incorrect:
+
+```text
+model_final_v3_new
+branch_m1_fix2
+checkpoint_best_latest
+MOTPT_v7_really_final
+```
+
+Git records implementation history. `M# / V## / R#### / E###` records scientific identity.
+
+### 17.5 Planned validation ladder
+
+The validation ladder should be reusable across model generations:
+
+```text
+Stage 0 — static / synthetic contract tests
+Stage 1 — baseline parity + dataset/opportunity diagnostics
+Stage 2 — primary-dataset canary
+Stage 3 — primary endpoint + matched controls
+Stage 4 — mechanism/falsification slices
+Stage 5 — DanceTrack independent validation
+Stage 6 — BFT stress test
+```
+
+Not every candidate reaches every stage. A generation can be stopped early if the mechanism fails.

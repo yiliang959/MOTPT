@@ -9,6 +9,8 @@ ACTIVE_RESEARCH_PR = #2
 CURRENT_RESEARCH_CONTRACT = V0_CONCEPT_OWNER_ACCEPTED__NOT_G0_FROZEN
 CURRENT_RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0
 CURRENT_ACCEPTED_MODEL = NONE
+MODEL_IDENTITY_POLICY = M_GENERATION__V_VALIDATION__R_RUN__E_EVIDENCE
+NEXT_RESERVED_MODEL = M1__NOT_IMPLEMENTED__NOT_G0_FROZEN
 BASELINE = MOTIP_PLANNED__NOT_MOTPT_VALIDATED
 DATASET_SELECTION = WORKING__SportsMOT_PRIMARY__DanceTrack_SECONDARY__BFT_STRESS_TEST
 DATASET_CONTRACT = docs/DATASETS.md__NOT_G0_FROZEN
@@ -130,3 +132,28 @@ Roles:
 - BFT — third extreme-dynamics/domain stress test.
 
 Before G0 dataset freeze, `docs/DATASETS.md` must be updated with independently measured provenance, Native parity, lifetime/gap/reappearance distributions, dynamics statistics, association-opportunity census and detector-bottleneck analysis.
+
+
+## Model generation / validation planning
+
+MOTPT uses four distinct identity levels:
+
+```text
+M#    scientific model generation
+V##   promoted validation/configuration iteration within M#
+R#### immutable execution run
+E###  scientific evidence question
+```
+
+Current planned identities:
+
+```text
+B0  Native MOTIP
+C1  temporal-memory-only
+C2  deterministic predictor
+C3  fixed-window multimodal predictor
+C4  multimodal predictor without MOT feedback
+M1  first MOTPT persistent-belief generation (reserved only)
+```
+
+Do not create `M2` merely because M1 underperforms or because a hyperparameter changes. A new scientific generation requires an explicit semantic change and tracked justification. See `docs/RESEARCH.md §17`.

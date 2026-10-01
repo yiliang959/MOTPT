@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v8",
+  "schema_version": "motpt-governance-v9",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -153,7 +153,24 @@
       "DanceTrack": "SECONDARY_VALIDATION_GENERALIZATION",
       "BFT": "THIRD_EXTREME_DYNAMICS_STRESS_TEST"
     },
-    "dataset_contract": "WORKING_SELECTION__NOT_G0_FROZEN__SEE_docs_DATASETS_md"
+    "dataset_contract": "WORKING_SELECTION__NOT_G0_FROZEN__SEE_docs_DATASETS_md",
+    "model_identity_policy": {
+      "baseline_namespace": "B0",
+      "control_namespace": "C#",
+      "model_generation": "M#",
+      "validation_iteration": "V##",
+      "execution_run": "R####",
+      "evidence_question": "E###",
+      "git_sha_is_provenance_not_model_identity": true
+    },
+    "planned_comparison_identities": {
+      "B0": "NATIVE_MOTIP",
+      "C1": "TEMPORAL_MEMORY_ONLY",
+      "C2": "DETERMINISTIC_FUTURE_PREDICTOR",
+      "C3": "FIXED_WINDOW_MULTIMODAL_PREDICTOR",
+      "C4": "MULTIMODAL_PREDICTION_NO_MOT_FEEDBACK",
+      "M1": "RESERVED_PERSISTENT_BELIEF_FEEDBACK_REFINEMENT__NOT_IMPLEMENTED"
+    }
   },
   "execution": {
     "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",
@@ -199,7 +216,25 @@
     "delete_merged_workstream_branches": true,
     "scientific_hypothesis_before_model_code": true,
     "issue_pr_role": "COORDINATION_REVIEW_AND_CHANGE_DISCUSSION_ONLY__CANONICAL_DECISIONS_MUST_BE_WRITTEN_BACK_TO_MD",
-    "git_role": "DIFF_HISTORY_PROVENANCE_AND_ERROR_RECOVERY__NOT_PROJECT_MEMORY"
+    "git_role": "DIFF_HISTORY_PROVENANCE_AND_ERROR_RECOVERY__NOT_PROJECT_MEMORY",
+    "new_model_generation_requires": [
+      "MATERIAL_SCIENTIFIC_CHANGE",
+      "EXPLICIT_DIFFERENCE_FROM_PREVIOUS_GENERATION",
+      "EVIDENCE_MOTIVATION",
+      "OWNER_T2_FREEZE"
+    ],
+    "model_generation_not_triggered_by": [
+      "SEED",
+      "LEARNING_RATE",
+      "BATCH_SIZE",
+      "EPOCH_COUNT",
+      "HIDDEN_DIMENSION",
+      "LOGGING",
+      "CONTRACT_RESTORING_BUG_FIX",
+      "EVALUATOR_ONLY_DIAGNOSTIC",
+      "ORDINARY_RERUN"
+    ],
+    "validation_iteration_rule": "V##__PROMOTED_CONFIG_WITHIN_SAME_SCIENTIFIC_MODEL__NOT_EVERY_DEBUG_RUN"
   },
   "provenance": {
     "record_at_least": [

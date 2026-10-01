@@ -71,6 +71,24 @@ One evidence entry represents a **scientific question or adjudicated comparison*
 
 Repeated runs that answer the same question should update the same entry or be summarized into one comparison table.
 
+## 4.1 Model / validation / run linkage
+
+Every evidence entry that cites executed results should identify the contributing scientific identities:
+
+```text
+Model/control: B0 | C1..C4 | M#
+Validation iteration: V## if promoted
+Runs: R#### ...
+```
+
+`M#`, `V##`, `R####` and `E###` are intentionally different namespaces.
+
+- Do not create one evidence entry per run.
+- Do not create one model version per seed.
+- Do not promote a debug run into a scientific model identity.
+- Evidence may aggregate multiple seeds/runs under one model-validation configuration.
+- A superseded validation iteration does not require a new evidence Markdown file; update the same scientific-question entry in this ledger.
+
 ## 5. Accepted evidence
 
 None yet.
