@@ -432,3 +432,20 @@ Therefore MOTPT must **not** claim the following as sufficient novelty:
 The remaining research burden is stronger: the project must demonstrate a **persistent longitudinal belief** that is observation-updated across the track lifetime, whose belief about the **same future target** can be measured as it refines, and whose persistent identity state is coupled to that refinement.
 
 A fixed-window multimodal motion predictor without those properties should be treated as a baseline/control, not the final MOTPT contribution.
+
+
+### Pre-experiment feasibility verdict
+
+**Status: CONDITIONAL GO.**
+
+The project is technically feasible and MOTIP has demonstrated headroom for temporal/association improvements, but the first experiment must be designed to distinguish MOTPT from simpler explanations.
+
+The experiment is considered informative only if it can separate:
+
+- extra temporal memory;
+- deterministic learned motion prediction;
+- fresh fixed-window multimodal motion hypotheses;
+- prediction used only as an auxiliary output;
+- the target MOTPT mechanism: **persistent belief + predictive feedback + observation-driven same-future refinement**.
+
+A gain over Native MOTIP alone is insufficient, because recent work already shows that generic temporal fusion, discriminative temporal embeddings and distributional motion hypotheses can improve tracking.

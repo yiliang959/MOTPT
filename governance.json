@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v6",
+  "schema_version": "motpt-governance-v7",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -97,10 +97,10 @@
     "gt_future_test_role": "NOT_MODEL_VISIBLE__EXPLICIT_CONTRACT_REQUIRED",
     "cross_repo_scientific_conclusion_inheritance": false,
     "working_core_operations": [
-      "PERSISTENT_BELIEF",
-      "MTP_PREDICT_TRANSITION",
-      "ASSOCIATION_WITH_PREDICTIVE_BELIEF",
-      "OBSERVATION_ASSIMILATION_CORRECTION"
+      "PERSISTENT_PREDICTIVE_BELIEF",
+      "MTP_FUTURE_PREDICTION_FROM_CURRENT_MOT_STATE",
+      "PREDICTIVE_SIGNAL_FEEDBACK_TO_ASSOCIATION_UPDATE",
+      "OBSERVATION_ASSIMILATION_AND_FUTURE_BELIEF_REFINEMENT"
     ],
     "current_non_claims": [
       "LATENT_STATE_ALONE_IS_NOT_NOVEL",
@@ -129,7 +129,16 @@
       "SAME_FUTURE_BELIEF_REFINEMENT",
       "IDENTITY_BELIEF_COUPLING"
     ],
-    "required_temporal_control": "MOTIP_PLUS_GENERIC_TEMPORAL_MEMORY_FUSION__GTF_LIKE"
+    "required_temporal_control": "MOTIP_PLUS_GENERIC_TEMPORAL_MEMORY_FUSION__GTF_LIKE",
+    "pre_experiment_review": "CONDITIONAL_GO__REQUIRES_BASELINE_PARITY_DATASET_DIAGNOSTIC_AND_MATCHED_CONTROLS",
+    "required_pre_experiment_controls": [
+      "NATIVE_MOTIP_PARITY",
+      "TEMPORAL_MEMORY_ONLY_CONTROL__GTF_LIKE",
+      "DETERMINISTIC_PREDICTOR_CONTROL",
+      "FIXED_WINDOW_MULTIMODAL_PREDICTOR_CONTROL__DIFFUTRACK_LIKE",
+      "PREDICTION_WITHOUT_MOT_FEEDBACK_CONTROL",
+      "PERSISTENT_BELIEF_WITH_FEEDBACK_TARGET"
+    ]
   },
   "execution": {
     "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",

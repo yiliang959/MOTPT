@@ -18,6 +18,7 @@ PRE_G0_REVIEW = PASS_WITH_FORMULATION_TIGHTENING__NO_EXECUTION_RELEASE
 OWNER_DIRECTION_20261001 = MOT_PRIMARY__MTP_FEEDBACK__2D_PROJECTED__FUTURE_BELIEF_REFINEMENT
 RETENTION_POLICY = OPEN__DATASET_DISTRIBUTION_STUDY_REQUIRED
 PRE_EXPERIMENT_NOVELTY_RISK = DIFFUTRACK_DIRECT_COLLISION__PERSISTENT_REFINEMENT_REQUIRED
+PRE_EXPERIMENT_REVIEW = CONDITIONAL_GO__PARITY_AND_DIAGNOSTICS_FIRST
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -84,3 +85,28 @@ Current rule:
 - raw experiment artifacts remain outside Git and are referenced by provenance;
 - new top-level or canonical `docs/` paths require explicit Owner approval;
 - literature paper notes are the controlled growth exception.
+
+
+## Pre-experiment gate
+
+Scientific review status: **CONDITIONAL GO**.
+
+Before model training, the first released work should establish:
+
+1. Native MOTIP parity on the exact pinned checkpoint/config/evaluator;
+2. dataset distributions for track lifetime, missing/occlusion gaps and reappearance gaps;
+3. case population where nonlinear/multimodal prediction could plausibly change an association decision;
+4. matched controls separating generic temporal memory from predictive-belief effects.
+
+Required comparison ladder for the first scientific generation:
+
+```text
+Native MOTIP
+  -> temporal-memory-only control
+  -> deterministic future predictor
+  -> fixed-window multimodal predictor
+  -> multimodal predictor without MOT feedback
+  -> persistent belief + predictive feedback + observation refinement
+```
+
+Do not interpret a gain over Native alone as evidence for the MOTPT hypothesis.
