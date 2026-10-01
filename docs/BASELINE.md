@@ -16,4 +16,4 @@ EXPERIMENT_PERMISSION = NONE
 
 When an authorized baseline setup is opened, independently bind upstream license/commit, exact dependencies/environment, datasets/official split, config/checkpoint SHA-256, detector threshold and native tracker/evaluation output. Record Native output parity against a reference before reuse of a diagnostic dump. TCR checkpoint locations or prior results are not substitutes for independent MOTPT provenance.
 
-Do not copy pretrained weights or upstream code into this Public repository during bootstrap. Consider `external/trackers/motip/` only after a bounded port and license review.
+Do not copy pretrained weights or upstream code into this Public repository during pre-G0 work. Prefer a separately managed upstream checkout/environment and record its immutable pin/license/provenance here. Vendoring third-party code into MOTPT would require an explicit Owner-approved structure change plus license review.

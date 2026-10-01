@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v3",
+  "schema_version": "motpt-governance-v4",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -108,7 +108,10 @@
       "MULTIMODAL_MTP_ALONE_IS_NOT_NOVEL",
       "JOINT_MOT_MTP_ALONE_IS_NOT_NOVEL",
       "BAYESIAN_FILTERING_ALONE_IS_NOT_NOVEL"
-    ]
+    ],
+    "runtime_observation_semantics": "UNLABELED_OBSERVATION_SET__IDENTITY_INFERRED_BY_ASSOCIATION",
+    "research_value_anchor": "IDENTITY_AWARE_MULTIMODAL_BELIEF_ASSIMILATION_AND_SAME_FUTURE_REFINEMENT",
+    "research_value_status": "PRE_G0_REVIEW_PASS__CONDITIONAL_ON_FALSIFICATION_TESTS"
   },
   "execution": {
     "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",

@@ -22,9 +22,11 @@
 | TOTP (ICCV'25) | ✓ | ~ | ✓ | ~ | — | — | online variable-observation MTP |
 | DreamTrack (CVPR'25) | ✓ | ~ | ✓ | ~ | SOT | ✓ (SOT) | multimodal future aids tracking |
 | HyperSSM (CVPR'26) | ✓ | ✓ | — | — | ✓ | ~ | learned state-space MOT motion |
+| Bayes-4DRTrack (IV'25) | ✓ | ~ | uncertainty-aware | ~ | ✓ | ✓ | Transformer motion prediction + Bayesian uncertainty in MOT |
 | LPWM (ICLR'26) | ✓ | ~ | ✓ | ~ | — | — | object-centric stochastic dynamics |
 | SURGE (ICML'26) | ✓ | ✓ | ✓ | ✓ | — | — | observation-corrected forecast posterior |
 | IMSETrack (ESWA'26) | ✓ | ✓ | — | ~ | SOT | ~ | persistent implicit motion state |
+| Sentinel (Sci. Rep.'26) | ✓ | ✓ | — | — | ✓ | — | per-track uncertainty-aware association/lifecycle |
 | **MOTPT target** | **✓** | **✓** | **✓** | **✓ core** | **✓ core** | **✓ same belief** | identity-aware posterior over latent flow |
 
 ## Claims this matrix rules out
@@ -41,7 +43,7 @@ Do **not** base MOTPT novelty solely on:
 
 ## Stronger working distinction
 
-[
+\[
 \boxed{
 \text{latent dynamics}
 +
@@ -51,7 +53,7 @@ Do **not** base MOTPT novelty solely on:
 +
 \text{object identity}
 }
-]
+\]
 
 The four parts should not be independent heads. One persistent belief should predict futures, constrain association, be corrected by the associated observation, and expose how belief about the **same future event** evolves.
 
@@ -63,6 +65,8 @@ The four parts should not be independent heads. One persistent belief should pre
 - **TOTP:** closest online multimodal MTP with variable observations; lacks MOT identity inference.
 - **LPWM:** closest object-centric stochastic latent dynamics; lacks standard MOT association focus.
 - **HyperSSM / IMSETrack:** strongest warning against renaming a recurrent/SSM hidden state as latent flow.
+- **Bayes-4DRTrack:** blocks a novelty claim based only on learned nonlinear motion prediction + Bayesian uncertainty inside MOT.
+- **Sentinel:** blocks a novelty claim based only on per-track uncertainty state driving association/lifecycle.
 
 ## Experiments implied by the literature
 
@@ -73,5 +77,5 @@ The four parts should not be independent heads. One persistent belief should pre
 - controlled observation-dropout duration;
 - re-observation mode reweight/prune test;
 - abrupt behavior change / belief expansion test;
-- same-future refinement curve for (q_t(X_T));
+- same-future refinement curve for \(q_t(X_T)\);
 - ambiguous-association test with similar objects but divergent dynamics.

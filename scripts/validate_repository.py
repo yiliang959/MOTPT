@@ -69,6 +69,21 @@ def validate(root: Path = ROOT) -> list[str]:
     if evidence_policy.get("canonical_ledger") != "docs/EVIDENCE.md" or not evidence_policy.get("one_file_only"):
         errors.append("SINGLE_EVIDENCE_LEDGER_POLICY_MISSING")
 
+    # Frozen top-level structure: ignore .git because CI/local checkout owns it.
+    allow_top = {x.rstrip("/") for x in layout.get("top_level_allowlist", [])}
+    actual_top = {p.name for p in root.iterdir() if p.name != ".git"}
+    unexpected_top = sorted(actual_top - allow_top)
+    if unexpected_top:
+        errors.append("UNAPPROVED_TOP_LEVEL:" + ",".join(unexpected_top))
+
+    motpt_dir = root / "motpt"
+    allowed_ns = {x.rstrip("/") for x in layout.get("motpt_namespace_allowlist", [])}
+    if motpt_dir.is_dir():
+        actual_ns = {p.name for p in motpt_dir.iterdir() if p.is_dir() and p.name != "__pycache__"}
+        unexpected_ns = sorted(actual_ns - allowed_ns)
+        if unexpected_ns:
+            errors.append("UNAPPROVED_MOTPT_NAMESPACE:" + ",".join(unexpected_ns))
+
     docs_dir = root / "docs"
     allowed_docs = set(layout.get("docs_canonical_files", []))
     if docs_dir.is_dir():
@@ -94,6 +109,10 @@ def validate(root: Path = ROOT) -> list[str]:
             errors.append("CURRENT_NOT_G0_DISCUSSION_HOLD")
         if "ACTIVE_RESEARCH_ISSUE = #1" not in current_text:
             errors.append("CURRENT_RESEARCH_ISSUE_MISMATCH")
+        if "ACTIVE_RESEARCH_PR = #2" not in current_text:
+            errors.append("CURRENT_RESEARCH_PR_MISMATCH")
+        if "\\nLITERATURE_LAYER" in current_text:
+            errors.append("CURRENT_LITERAL_NEWLINE_ESCAPE")
 
     return errors
 

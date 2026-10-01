@@ -14,6 +14,7 @@ CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS
 LITERATURE_LAYER = docs/literature/README.md__18_CORE_PAPERS
 STRUCTURE_POLICY = FROZEN_V1__CANONICAL_MD_UPDATE_IN_PLACE
 EVIDENCE_POLICY = SINGLE_LEDGER__docs/EVIDENCE.md
+PRE_G0_REVIEW = PASS_WITH_FORMULATION_TIGHTENING__NO_EXECUTION_RELEASE
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -62,7 +63,7 @@ Until then, literature review, docs/governance edits and synthetic/static tests 
 
 ## Literature layer
 
-The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 18 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
+The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 20 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
 
 
 ## Repository structure policy

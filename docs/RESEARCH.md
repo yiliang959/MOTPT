@@ -20,13 +20,15 @@ A physical object does not begin or stop moving because a camera observes it. We
 F_i(t).
 \]
 
-Video provides only discrete and potentially intermittent observations of that process:
+Video provides only discrete and potentially intermittent measurements of that process. At runtime, however, MOT does **not** receive identity-labeled observations. Frame \(t\) provides an unordered observation/detection set
 
 \[
-O_t^i.
+D_t=\{d_t^j\}_{j=1}^{N_t},
 \]
 
-Detector misses, occlusion, overlap, field-of-view changes and visual ambiguity can make \(O_t^i\) unavailable or unreliable even though the physical object and its dynamics continue to evolve.
+and the tracker must infer which observation, if any, corresponds to each persistent object hypothesis.
+
+Detector misses, occlusion, overlap, field-of-view changes and visual ambiguity can make the evidence for a physical object unavailable or unreliable even though the object and its dynamics continue to evolve.
 
 MOTPT therefore studies online multi-object tracking as:
 
@@ -36,11 +38,13 @@ MOTPT therefore studies online multi-object tracking as:
 
 rather than only frame-to-frame detection association.
 
-The model-accessible research object is **not** the unknowable true physical flow itself. It is a belief over latent flow conditioned on causal observations:
+The model-accessible research object is **not** the unknowable true physical flow itself. Track index \(i\) denotes a **persistent tracker hypothesis**, not a ground-truth identity supplied with the current observation. A working marginal view is
 
 \[
-B_t^i = p(F_t^i \mid O_{\le t}).
+B_t^i \approx p(F_t^i,E_t^i \mid D_{1:t},A_{1:t}),
 \]
+
+where \(E_t^i\) denotes existence-related belief and \(A_{1:t}\) is the tracker-inferred association history. The exact joint factorization is intentionally not frozen; association uncertainty may later be represented explicitly rather than conditioned on a single history.
 
 The exact probabilistic representation of \(B_t^i\) is not frozen. Gaussian mixtures, particles, stochastic latent variables, trajectory modes, latent tokens or other calibrated representations remain open.
 
@@ -102,7 +106,7 @@ MOTPT does **not** impose a fixed observation window as part of the scientific p
 An object's observed lifetime can be arbitrarily long. The intended abstraction is a persistent recursively updated belief:
 
 \[
-B_t^i = f(B_{t-1}^i,O_t),
+B_t^i = f(B_{t-1}^i,D_t,A_t),
 \]
 
 not an ever-growing raw sequence
@@ -160,7 +164,7 @@ The goal is **future-belief refinement**, not mandatory monotonic entropy reduct
 Unlike many trajectory-prediction or latent-dynamics settings, MOT must determine which current observation belongs to which persistent object. A working future formulation may therefore need to reason over
 
 \[
-p(F_t^i,A_t,E_t^i\mid O_{\le t}),
+p(F_t^i,A_t,E_t^i\mid D_{1:t}),
 \]
 
 where \(A_t\) denotes association uncertainty and \(E_t^i\) may represent existence-related belief. The exact factorization is open.
@@ -265,7 +269,7 @@ MOTPT should evaluate not only whether a future prediction is accurate once, but
 For fixed \(T\):
 
 \[
-q_t(X_T)=p(X_T\mid O_{\le t}).
+q_t^i(X_T)=p(X_T^i\mid D_{1:t},A_{1:t}).
 \]
 
 A useful model should, in expectation and under valid evidence, improve proper predictive scores and calibration as relevant observations accumulate, while retaining the ability to broaden or switch modes after genuinely surprising behavior.
@@ -344,3 +348,30 @@ No scientific execution is authorized until these are narrowed into a separate e
 The living nearest-neighbor survey is maintained in [literature/README.md](literature/README.md), with a cross-paper [novelty/collision matrix](literature/NOVELTY_MATRIX.md) and per-paper extraction notes under `docs/literature/papers/`.
 
 The survey is supporting analysis, not accepted scientific evidence. If a literature note conflicts with this research contract, update the contract only through the tracked research workstream rather than silently treating the note as authority.
+
+
+## 15. Pre-G0 research-value review
+
+The current direction remains scientifically worthwhile **only if** the shared belief formulation survives stronger controls than ordinary motion modeling.
+
+### Value-positive outcome
+
+MOTPT becomes a meaningful contribution if one persistent object belief can simultaneously:
+
+1. represent calibrated multimodal future uncertainty;
+2. improve identity association under ambiguity, non-linear motion or missing observations;
+3. be corrected by re-observation in a measurable way;
+4. improve prediction and tracking through the **same** state rather than independent heads;
+5. outperform capacity-matched recurrent/SSM, classical-filter and MTP-only controls for the intended reason.
+
+### Kill / downgrade conditions
+
+The central hypothesis should be revised or downgraded if:
+
+- the proposed belief behaves no better than a deterministic RNN/SSM motion feature;
+- tracking gains come only from a stronger predictor but future-belief refinement is not measurable;
+- multimodal futures do not improve association or uncertainty calibration;
+- the shared state provides no benefit over separate MOT and MTP heads;
+- identity-aware assimilation adds complexity without reproducible benefit.
+
+The research value therefore lies in **identity-aware multimodal belief assimilation for online MOT**, not in introducing another motion predictor.
