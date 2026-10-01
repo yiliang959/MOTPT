@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
     "README.md", "AGENTS.md", "CLAUDE.md", "governance.json",
     "docs/RESEARCH.md", "docs/EVIDENCE.md", "docs/CURRENT.md", "docs/STRUCTURE.md",
-    "docs/BASELINE.md", "docs/DIAGNOSTICS.md", "docs/CROSS_REPO_REUSE.md",
+    "docs/BASELINE.md", "docs/DATASETS.md", "docs/DIAGNOSTICS.md", "docs/CROSS_REPO_REUSE.md",
     "motpt/__init__.py", "motpt/config/provenance.py", "motpt/data/mot_io.py",
     "motpt/diagnostics/schema.py", "motpt/evaluation/protocol.py",
     ".github/workflows/quality.yml",
@@ -92,7 +92,7 @@ def validate(root: Path = ROOT) -> list[str]:
         if unexpected_docs:
             errors.append("UNAPPROVED_CANONICAL_DOCS:" + ",".join(unexpected_docs))
 
-        forbidden_tokens = ("EVIDENCE_", "EVIDENCE-", "evidence_", "evidence-", "_final.md", "_latest.md", "_new.md")
+        forbidden_tokens = ("EVIDENCE_", "EVIDENCE-", "evidence_", "evidence-", "DATASETS_", "DATASETS-", "_final.md", "_latest.md", "_new.md", "_v2.md", "_v3.md")
         for path in docs_dir.rglob("*.md"):
             rel = path.relative_to(root).as_posix()
             if rel.startswith("docs/literature/papers/"):

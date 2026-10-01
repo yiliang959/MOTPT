@@ -47,6 +47,7 @@ MOTPT/
 │   ├── CURRENT.md
 │   ├── STRUCTURE.md
 │   ├── BASELINE.md
+│   ├── DATASETS.md
 │   ├── DIAGNOSTICS.md
 │   └── CROSS_REPO_REUSE.md
 ├── motpt/
@@ -88,3 +89,8 @@ The stable repository contract is [docs/STRUCTURE.md](docs/STRUCTURE.md).
 Canonical Markdown is updated **in place**. Git provides history/diff/recovery; it is not a substitute for current project state. In particular, [docs/EVIDENCE.md](docs/EVIDENCE.md) is the single evidence ledger—do not create `EVIDENCE_v2.md`, per-run evidence files, dated status copies, or permanent run-result directory trees.
 
 Literature notes under `docs/literature/papers/` are the controlled exception because each distinct paper is an independent source.
+
+
+## Dataset plan
+
+The living dataset selection and verification checklist is [docs/DATASETS.md](docs/DATASETS.md). Current working roles are SportsMOT as primary, DanceTrack as secondary validation, and BFT as an extreme-dynamics stress test. The ranking is not G0-frozen and must be revised if measured dataset distributions contradict the working assumptions.

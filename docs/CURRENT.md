@@ -10,6 +10,8 @@ CURRENT_RESEARCH_CONTRACT = V0_CONCEPT_OWNER_ACCEPTED__NOT_G0_FROZEN
 CURRENT_RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0
 CURRENT_ACCEPTED_MODEL = NONE
 BASELINE = MOTIP_PLANNED__NOT_MOTPT_VALIDATED
+DATASET_SELECTION = WORKING__SportsMOT_PRIMARY__DanceTrack_SECONDARY__BFT_STRESS_TEST
+DATASET_CONTRACT = docs/DATASETS.md__NOT_G0_FROZEN
 CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS
 LITERATURE_LAYER = docs/literature/README.md__22_CORE_PAPERS
 STRUCTURE_POLICY = FROZEN_V1__CANONICAL_MD_UPDATE_IN_PLACE
@@ -110,3 +112,21 @@ Native MOTIP
 ```
 
 Do not interpret a gain over Native alone as evidence for the MOTPT hypothesis.
+
+
+## Dataset selection
+
+The canonical dataset plan is `docs/DATASETS.md`.
+
+Current working order:
+
+```text
+SportsMOT > DanceTrack > BFT
+```
+
+Roles:
+- SportsMOT — primary hypothesis/development dataset;
+- DanceTrack — secondary mechanism validation/generalization;
+- BFT — third extreme-dynamics/domain stress test.
+
+Before G0 dataset freeze, `docs/DATASETS.md` must be updated with independently measured provenance, Native parity, lifetime/gap/reappearance distributions, dynamics statistics, association-opportunity census and detector-bottleneck analysis.

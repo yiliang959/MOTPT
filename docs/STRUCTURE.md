@@ -34,6 +34,7 @@ MOTPT/
 │   ├── EVIDENCE.md
 │   ├── STRUCTURE.md
 │   ├── BASELINE.md
+│   ├── DATASETS.md
 │   ├── DIAGNOSTICS.md
 │   ├── CROSS_REPO_REUSE.md
 │   └── literature/
@@ -65,6 +66,7 @@ No new top-level directory and no new canonical file directly under `docs/` may 
 | `docs/CURRENT.md` | one current control plane: active issue/PR/task/permissions |
 | `docs/EVIDENCE.md` | **one scientific evidence ledger** |
 | `docs/BASELINE.md` | baseline identity / pins / parity state |
+| `docs/DATASETS.md` | single dataset selection, role and verification checklist |
 | `docs/DIAGNOSTICS.md` | diagnostic semantics and schemas |
 | `docs/CROSS_REPO_REUSE.md` | cross-repository transfer policy |
 | `docs/STRUCTURE.md` | this fixed structure / knowledge-management contract |

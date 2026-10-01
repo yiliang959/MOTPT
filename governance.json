@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v7",
+  "schema_version": "motpt-governance-v8",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -52,13 +52,15 @@
       "docs/CROSS_REPO_REUSE.md": "single_cross_repo_policy",
       "docs/STRUCTURE.md": "single_repository_structure_contract",
       "docs/literature/README.md": "single_literature_index",
-      "docs/literature/NOVELTY_MATRIX.md": "single_literature_comparison_matrix"
+      "docs/literature/NOVELTY_MATRIX.md": "single_literature_comparison_matrix",
+      "docs/DATASETS.md": "single_dataset_selection_and_verification_contract"
     },
     "update_in_place_rules": [
       "CURRENT_STATE_CHANGES_UPDATE_docs_CURRENT_md",
       "RESEARCH_FORMULATION_CHANGES_UPDATE_docs_RESEARCH_md",
       "SCIENTIFIC_EVIDENCE_CHANGES_UPDATE_docs_EVIDENCE_md",
       "BASELINE_IDENTITY_CHANGES_UPDATE_docs_BASELINE_md",
+      "DATASET_SELECTION_CHANGES_UPDATE_docs_DATASETS_md",
       "LITERATURE_COMPARISON_CHANGES_UPDATE_existing_literature_files",
       "DO_NOT_CREATE_VERSIONED_BACKUP_OR_LATEST_MD_FILES",
       "GIT_HISTORY_IS_HISTORY_NOT_A_PARALLEL_KNOWLEDGE_BASE"
@@ -78,7 +80,9 @@
       "*_v2.md",
       "*_v3.md",
       "handoff_*.md",
-      "status_*.md"
+      "status_*.md",
+      "DATASETS_*.md",
+      "DATASETS-*.md"
     ]
   },
   "science": {
@@ -138,7 +142,18 @@
       "FIXED_WINDOW_MULTIMODAL_PREDICTOR_CONTROL__DIFFUTRACK_LIKE",
       "PREDICTION_WITHOUT_MOT_FEEDBACK_CONTROL",
       "PERSISTENT_BELIEF_WITH_FEEDBACK_TARGET"
-    ]
+    ],
+    "dataset_working_order": [
+      "SportsMOT",
+      "DanceTrack",
+      "BFT"
+    ],
+    "dataset_working_roles": {
+      "SportsMOT": "PRIMARY_HYPOTHESIS_DEVELOPMENT",
+      "DanceTrack": "SECONDARY_VALIDATION_GENERALIZATION",
+      "BFT": "THIRD_EXTREME_DYNAMICS_STRESS_TEST"
+    },
+    "dataset_contract": "WORKING_SELECTION__NOT_G0_FROZEN__SEE_docs_DATASETS_md"
   },
   "execution": {
     "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",
@@ -250,6 +265,7 @@
       "CURRENT.md",
       "EVIDENCE.md",
       "STRUCTURE.md",
+      "DATASETS.md",
       "BASELINE.md",
       "DIAGNOSTICS.md",
       "CROSS_REPO_REUSE.md"
