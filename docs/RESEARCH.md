@@ -48,6 +48,15 @@ where \(E_t^i\) denotes existence-related belief and \(A_{1:t}\) is the tracker-
 
 The exact probabilistic representation of \(B_t^i\) is not frozen. Gaussian mixtures, particles, stochastic latent variables, trajectory modes, latent tokens or other calibrated representations remain open.
 
+### Operational emphasis: predictive belief over physical flow
+
+MOTPT keeps both levels:
+
+1. **Underlying flow/process \(F_i(t)\):** the motivating physical/dynamical process that exists independently of whether the camera observes it.
+2. **Predictive belief \(B_t^i\):** the model's operational research object—its current uncertain belief about that process and its possible futures.
+
+The first level gives the scientific interpretation; the second is what the model can actually infer, update and evaluate. The project therefore emphasizes **predictive belief more strongly than direct recovery of a “true flow.”** The model belief does not causally change the physical object's motion; instead, current MOT state generates future hypotheses and subsequent observations feed back to revise the belief and tracking decision.
+
 ## 2. Bayesian perspective
 
 MOTPT intentionally adopts the **Bayesian filtering / data-assimilation perspective** as a useful abstraction. Bayesian filtering itself is not claimed as novel.
@@ -58,25 +67,37 @@ The working loop is:
 \boxed{\text{Predict} \rightarrow \text{Observe} \rightarrow \text{Associate} \rightarrow \text{Correct}}
 \]
 
-with a learned multimodal MTP component serving as the predictive/transition mechanism inside online MOT.
+with a learned multimodal MTP component providing a **predictive prior/signal** from the current MOT state back into online MOT.
 
-Conceptually:
-
-\[
-B_{t|t-1}^i = \mathcal{P}(B_{t-1}^i)
-\]
-
-followed by association against current observations, and for an accepted observation \(z_t^j\),
+Conceptually, the current MOT belief/state produces a future distribution
 
 \[
-B_t^i = \mathcal{U}(B_{t|t-1}^i,z_t^j).
+q_t^i(X_{t+1:t+H}) = \mathcal{P}_{\mathrm{MTP}}(B_t^i),
 \]
 
-A closed-form Bayesian update is **not** required. The learned operators may approximate prediction and posterior correction while preserving explicit uncertainty semantics.
+and that predictive distribution contributes evidence for association and state update when the next observations arrive. A generic update can be written as
 
-## 3. Role of MTP: predictive operator inside MOT
+\[
+B_{t+1}^i = \mathcal{U}(B_t^i, q_t^i, D_{t+1}, A_{t+1}).
+\]
 
-MTP is not an independent downstream head attached after tracking.
+A closed-form Bayesian update is **not** required. The MTP module is also **not** frozen as the complete latent-state transition operator; its required role is to predict from the current MOT state and return a useful uncertainty-aware signal to MOT.
+
+## 3. Role of MTP: MOT-based future prediction with feedback to MOT
+
+MTP is not the primary task and is not an independent downstream head attached after tracking.
+
+The intended direction is:
+
+\[
+\boxed{
+\text{current MOT state/belief}
+\rightarrow
+\text{multimodal MTP prediction}
+\rightarrow
+\text{predictive signal back to MOT}
+}
+\]
 
 Given current belief \(B_t^i\), the MTP component models a multimodal predictive distribution such as
 
@@ -84,20 +105,16 @@ Given current belief \(B_t^i\), the MTP component models a multimodal predictive
 q_t^i(X_{t+1:t+H}\mid B_t^i).
 \]
 
-This predictive belief should have three roles:
+This output should have three roles:
 
-1. **Propagation.** When no usable observation is available, maintain and evolve the object's belief rather than equating missing observation with missing state.
-2. **Association evidence.** A candidate observation \(z_t^j\) should be evaluated partly under the predictive belief of object \(i\):
+1. **Predictive support during weak/missing observation.** Provide plausible future support rather than reducing the track to fixed velocity extrapolation.
+2. **Association feedback.** A candidate observation \(z_{t+1}^j\) can be evaluated against the predicted future belief:
    \[
-   p(z_t^j\mid B_{t|t-1}^i).
+   p(z_{t+1}^j\mid q_t^i,B_t^i).
    \]
-3. **Future prediction.** Expose the current multimodal future belief as an explicit prediction product that can be evaluated and later revised.
+3. **Belief refinement signal.** Once an observation is associated, its consistency/inconsistency with prior future hypotheses updates the persistent belief.
 
-The intended research distinction is therefore:
-
-\[
-\boxed{\text{MTP-as-transition/predictive inference for MOT, not MOT + an auxiliary MTP head}}
-\]
+MTP therefore acts as a **prediction tool used by MOT**. The primary scientific target remains tracking/identity continuity; forecasting quality is both an auxiliary capability and a diagnostic for whether the predictive belief is meaningful.
 
 ## 4. No fixed observation horizon
 
@@ -123,6 +140,24 @@ The desired property is:
 
 subject to future empirical validation. Raw-history retention, compression and state capacity remain implementation questions, not assumptions of the problem statement.
 
+### Stage-1 coordinate scope
+
+The first research stage is limited to **2D projected/image-space MOT**. The project does not initially claim recovery of a world-coordinate physical flow. Camera motion, perspective and projection can confound observed trajectories, so the stage-1 object is a **projected predictive flow belief** derived from image-space evidence. Ego-motion compensation or world-relative modeling may be added later only if evidence shows they are necessary.
+
+### Retention/history policy remains empirical
+
+“No fixed observation window” does not mean “retain every raw observation forever” or “keep every disappeared track forever.” The representation may process arbitrarily long track lifetimes through a bounded recursive state, while the computational retention/termination policy remains open.
+
+Before fixing that policy, an authorized dataset diagnostic should measure at least:
+
+- track lifetime distribution;
+- visible segment length;
+- consecutive missing/occlusion gap distribution;
+- reappearance gap distribution;
+- frequency of useful identity recovery after different gap lengths.
+
+Those measurements are planned scientific inputs to the retention policy and are **not yet authorized for execution** in the current HOLD state.
+
 ## 5. Problems to solve
 
 ### P1 — Discrete observations versus persistent dynamics
@@ -131,11 +166,7 @@ Standard online MOT primarily operates on observations and recent track history.
 
 ### P2 — Missing observation versus missing object state
 
-\[
-O_t^i=\varnothing
-\]
-
-must not automatically imply
+If no usable observation in \(D_t\) is associated with track hypothesis \(i\), that must not automatically imply
 
 \[
 B_t^i=\varnothing.
@@ -202,19 +233,15 @@ The belief must be capable, directly or indirectly, of representing:
 
 These are conceptual requirements, not four mandatory neural submodules.
 
-### Module / Operation 3 — MTP Predictive Transition
+### Module / Operation 3 — MTP Future Predictor / Predictive Signal
 
 \[
-B_{t-1}^i \xrightarrow{\mathcal{P}} B_{t|t-1}^i
+B_t^i \xrightarrow{\mathcal{P}_{\mathrm{MTP}}} q_t^i(X_{t+1:t+H}).
 \]
 
-and
+The MTP predictor takes the **current MOT belief/state as its base** and produces multimodal future hypotheses plus uncertainty information that can be fed back into MOT.
 
-\[
-B_t^i \rightarrow q_t^i(X_{t+1:t+H}).
-\]
-
-The transition should support uncertainty evolution and multimodal futures. It should not be reduced by definition to deterministic velocity extrapolation or top-\(K\) coordinate regression.
+It is not required in v0 to be the complete hidden-state transition function. It must, however, provide more than deterministic velocity extrapolation or an uncalibrated top-\(K\) coordinate list.
 
 ### Module / Operation 4 — Joint Association and Belief Update
 
@@ -237,27 +264,28 @@ If no usable observation is assigned, the predicted belief can persist subject t
 ## 7. Working architecture sketch
 
 ```text
-Persistent object belief B(t-1)
+Current MOT belief B(t)
             |
-            v
-   MTP Predict / Transition
-            |
-            +------------------> multimodal future belief
-            |
-            v
-    predicted belief B(t|t-1)
-            |
-current observations -> Observation Encoder
-            |                    |
-            +------> Association-+
-                         |
-                         v
-                  Belief Correction
-                         |
-                         v
-                        B(t)
-                         |
-                         +------> next frame
+            +----------------------+
+            |                      |
+            v                      |
+      MTP Future Predictor         |
+            |                      |
+            v                      |
+   multimodal future q(t)          |
+            |                      |
+            +---- predictive ------+
+                  feedback
+                     |
+next observations -> Observation Encoder
+                     |
+                     v
+             Association / MOT Update
+                     |
+                     v
+                  B(t+1)
+                     |
+                     +------> next prediction
 ```
 
 This is a **scientific dataflow sketch**, not an implementation contract.
@@ -282,7 +310,7 @@ Potential future metrics include proper likelihood scores, calibration, coverage
 - **RQ2 — Multimodality:** Can that belief represent genuinely unresolved future modes rather than only a deterministic hidden feature?
 - **RQ3 — Assimilation:** Do new observations meaningfully revise prior future beliefs through reweighting, pruning, expansion or mode change?
 - **RQ4 — Tracking:** Does predictive belief improve identity continuity, especially under occlusion, missed detections, nonlinear motion and ambiguous neighboring objects?
-- **RQ5 — Joint benefit:** Do tracking and future prediction improve through a shared latent-flow belief rather than two loosely coupled heads?
+- **RQ5 — MOT-first joint benefit:** Does MTP-derived future belief improve MOT identity continuity, while prediction quality remains measurable enough to validate that the feedback signal is meaningful?
 - **RQ6 — Falsifiability:** Can controlled diagnostics show that the learned belief contains information beyond recent velocity/trajectory history or a generic recurrent feature?
 
 ## 10. Working contribution hypothesis
@@ -290,9 +318,9 @@ Potential future metrics include proper likelihood scores, calibration, coverage
 If supported empirically, the intended contribution package is:
 
 1. **Persistent latent-flow belief formulation.** Online MOT is framed as sequential inference over object-specific latent dynamical beliefs under discrete/intermittent observations.
-2. **MTP as the MOT predictive operator.** Learned multimodal trajectory prediction becomes the transition/predictive mechanism used for propagation and identity association, not merely an auxiliary forecasting task.
+2. **MTP-to-MOT predictive feedback.** Learned multimodal trajectory prediction takes the current MOT belief/state as input and returns future uncertainty as an association/update signal, rather than existing only as a downstream forecast.
 3. **Observation-conditioned future-belief refinement.** The work explicitly studies how predictions for the same future target evolve as observations accumulate.
-4. **Unified tracking and prediction state.** Identity continuity and multimodal future prediction use one persistent belief process.
+4. **MOT-first shared belief.** Identity continuity is the primary task; MTP quality is an auxiliary measurable capability used to validate and improve the same persistent belief process.
 
 These are **working hypotheses/contributions**, not accepted claims.
 
@@ -330,8 +358,8 @@ Failure on these conditions should trigger problem/method revision rather than a
 Still unresolved:
 
 - formal definition and representational family of latent flow belief;
-- treatment of camera motion and image-space versus world-relative dynamics;
-- exact existence/termination semantics;
+- whether stage-1 projected/image-space flow requires explicit camera-motion compensation;
+- exact existence/termination/retention semantics after dataset-distribution analysis;
 - association factorization and role of appearance;
 - future horizon and future-mode representation;
 - loss functions and probabilistic calibration objective;
@@ -375,3 +403,17 @@ The central hypothesis should be revised or downgraded if:
 - identity-aware assimilation adds complexity without reproducible benefit.
 
 The research value therefore lies in **identity-aware multimodal belief assimilation for online MOT**, not in introducing another motion predictor.
+
+
+## 16. Owner decisions — 2026-10-01
+
+The following v0 directional decisions are now fixed for the ongoing G0 discussion:
+
+1. **Flow + belief:** both the underlying physical flow/process and model belief remain conceptually relevant, but the operational research emphasis is the **predictive belief**.
+2. **MTP role:** MTP takes the current MOT state/belief as its base, predicts multimodal futures, and returns predictive information **back to MOT**.
+3. **Terminology:** use **Future Belief Refinement** as the formal term rather than requiring monotonic “future convergence.”
+4. **Initial spatial scope:** begin with **2D projected/image-space MOT**; do not initially claim world-flow recovery.
+5. **Task priority:** **MOT is primary**. MTP is an auxiliary predictive mechanism and evaluation signal used to improve/validate MOT.
+6. **History/retention:** do not freeze a fixed history or track-retention limit yet. First measure dataset track/gap/reappearance distributions under a separately authorized diagnostic, then choose the retention policy.
+
+These decisions narrow the research direction but still do not constitute final G0 architecture/training/evaluation freeze.

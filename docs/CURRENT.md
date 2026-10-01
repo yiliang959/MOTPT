@@ -15,6 +15,8 @@ LITERATURE_LAYER = docs/literature/README.md__20_CORE_PAPERS
 STRUCTURE_POLICY = FROZEN_V1__CANONICAL_MD_UPDATE_IN_PLACE
 EVIDENCE_POLICY = SINGLE_LEDGER__docs/EVIDENCE.md
 PRE_G0_REVIEW = PASS_WITH_FORMULATION_TIGHTENING__NO_EXECUTION_RELEASE
+OWNER_DIRECTION_20261001 = MOT_PRIMARY__MTP_FEEDBACK__2D_PROJECTED__FUTURE_BELIEF_REFINEMENT
+RETENTION_POLICY = OPEN__DATASET_DISTRIBUTION_STUDY_REQUIRED
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -34,15 +36,17 @@ Issue #1 tracks the living v0 formulation. The Owner approved writing the curren
 Current core:
 
 ```text
-persistent object belief
-    -> MTP predictive transition
-    -> current observation
-    -> predictive association
-    -> belief correction
-    -> next frame
+current MOT belief/state
+    -> multimodal MTP future prediction
+    -> predictive signal returned to MOT
+    -> next observation / association
+    -> MOT belief update
+    -> repeat
 ```
 
-MTP is treated as a predictive tool **inside** MOT. MOTPT does not impose a fixed observation window; each object's belief is recursively maintained across its tracked lifetime.
+**MOT is the primary task.** MTP is an auxiliary predictive mechanism built from the current MOT state and fed back to improve MOT. The formal term is **Future Belief Refinement**. Stage 1 is **2D projected/image-space MOT**.
+
+MOTPT does not impose a fixed observation window, but computational retention/termination is not assumed infinite. The retention policy remains open until track-lifetime, missing-gap and reappearance-gap distributions are measured under an authorized dataset diagnostic.
 
 ## Current scientific status
 
@@ -52,12 +56,13 @@ No dataset, model implementation, training objective, evaluation population or a
 
 ## Next decisions before G0 freeze
 
-1. tighten the mathematical definition of latent-flow belief and its uncertainty/multimodality semantics;
-2. convert the survey into explicit novelty/non-novelty boundaries and nearest-neighbor comparisons;
-3. define minimal falsification tests and baselines;
-4. decide image-space versus world-relative/camera-compensated flow assumptions;
-5. select datasets/splits, MTP representation family and MOTIP integration point;
-6. freeze one minimal implementable contract before any scientific execution.
+1. tighten the mathematical representation of predictive belief and its uncertainty/multimodality semantics;
+2. define minimal falsification tests and capacity-matched baselines;
+3. select datasets/splits and specify the first authorized **track-lifetime / missing-gap / reappearance-gap distribution study**;
+4. choose the MTP representation family and exact MOTIP integration/feedback point;
+5. decide whether stage-1 image-space modeling needs explicit camera-motion compensation;
+6. define losses, MOT-primary acceptance criteria and secondary MTP/refinement metrics;
+7. freeze one minimal implementable contract before model execution.
 
 Until then, literature review, docs/governance edits and synthetic/static tests are allowed; benchmark-consuming research execution is not.
 
