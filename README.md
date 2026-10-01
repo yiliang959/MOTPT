@@ -1,29 +1,41 @@
 # MOTPT
 
-Independent multi-object tracking (MOT) research workspace.
+Independent research workspace for **persistent latent-flow belief inference in online multi-object tracking and future prediction**.
 
-> **Status:** Repository bootstrap only. The scientific hypothesis, model architecture, training objective, and experimental protocol are **not yet frozen**. No method claim is made in this initial commit.
+> **Current status:** v0 scientific concept accepted for tracked research discussion; final G0 method contract is **not frozen** and scientific execution remains on HOLD.
 
-## Purpose
+## Working idea
 
-MOTPT is a separate research line from [TCR-MOT](https://github.com/yiliang959/TCR_MOT_tmp_V2). Both projects may use a version-pinned native [MOTIP](https://github.com/MCG-NJU/MOTIP) baseline and independently verified reusable diagnostics. A shared baseline does **not** imply a shared hypothesis, model design, scientific conclusion, or execution authorization.
+MOTPT treats video as discrete and potentially intermittent observations of physical objects whose underlying dynamics continue over time. Each tracked object should maintain a persistent belief over its latent dynamical flow. A learned multimodal MTP component is studied as the predictive/transition operator inside MOT; incoming observations then support association and correction of the belief.
 
-The proposed trajectory/observation research intuition is **deliberately not recorded as a research contract** until the Project Owner reviews and freezes it.
+The core research loop is:
+
+\`\`\`text
+Persistent Belief -> MTP Predict -> Observe -> Associate -> Correct -> Persistent Belief
+\`\`\`
+
+This is a living formulation. The exact latent representation, probabilistic family, architecture, losses, datasets and evaluation contract are intentionally not frozen.
 
 ## First read
 
-1. `governance.json` — project authority, scope and execution gates.
-2. `AGENTS.md` — operating rules for all agents.
-3. `docs/RESEARCH.md` — research contract (currently UNDEFINED).
-4. `docs/EVIDENCE.md` — accepted evidence, not a workspace for speculation.
-5. `docs/CURRENT.md` — active workstream and permissions.
-6. Active Issue / Draft PR, if any.
+1. \`governance.json\` — project authority, scope and execution gates.
+2. \`AGENTS.md\` — operating rules for all agents.
+3. \`docs/RESEARCH.md\` — canonical living v0 research formulation.
+4. \`docs/EVIDENCE.md\` — accepted evidence only.
+5. \`docs/CURRENT.md\` — active workstream and permissions.
+6. Active Issue / Draft PR.
 
-`CLAUDE.md` is a pointer to these files; it is not a parallel source of truth.
+\`CLAUDE.md\` is a pointer to these files; it is not a parallel source of truth.
 
-## Layout
+## Research boundary
 
-```text
+MOTPT is separate from TCR-MOT. Both may use a version-pinned Native MOTIP baseline and independently reviewed reusable infrastructure, but hypotheses, evidence, architectures, model versions and execution permissions are not inherited.
+
+MOTPT does **not** claim Bayesian filtering, latent state, object permanence, multimodal forecasting or joint MOT+MTP as individually novel. The working novelty question is whether persistent object-specific latent-flow belief, learned multimodal predictive transition, observation-driven future-belief refinement and identity inference can be unified into a distinct and measurable online MOT problem.
+
+## Repository layout
+
+\`\`\`text
 MOTPT/
 ├── governance.json
 ├── AGENTS.md
@@ -44,25 +56,21 @@ MOTPT/
 ├── scripts/
 ├── tests/
 └── .github/workflows/
-```
+\`\`\`
 
-No model/training implementation is scaffolded before a scientific-contract freeze. Third-party code, datasets and checkpoints are not imported during bootstrap. If needed later, place pinned third-party code under `external/` with license and provenance checks; store large/local artifacts outside Git.
+No model/training implementation is authorized yet. Third-party code, datasets and checkpoints are not imported by this workstream.
 
-## Default state
+## Allowed state
 
-`BOOTSTRAP_ONLY / SCIENTIFIC_EXECUTION_HOLD`.
+\`HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION\`.
 
-Allowed: documentation, independent infrastructure, static checks, unit tests and provenance review. Not authorized: dataset-consuming experimental runs, GPU model forward, optimizer steps, VAL/TEST scoring, oracle promotion to model inputs, scientific claims, or cross-repository copying without review.
+Allowed: research documentation, literature review, governance, independent infrastructure, static checks, synthetic unit tests and provenance review.
+
+Not authorized: dataset-consuming experiments, Native/GPU model forward, optimizer steps, training, VAL/TEST inference or TrackEval, oracle promotion to model inputs, cross-repository imports, or publication claims.
 
 ## Local scaffold checks
 
-```bash
+\`\`\`bash
 python scripts/validate_repository.py
 python -m unittest discover -s tests -v
-```
-
-These commands are CPU-only and do not require datasets, checkpoints or ML frameworks.
-
-## Project boundary
-
-MOTPT owns its own issues, branches, pull requests, evidence, model versions and Owner approvals. TCR evidence may be cited with exact provenance and separately validated; it is never automatically adopted as MOTPT evidence. See `docs/CROSS_REPO_REUSE.md`.
+\`\`\`

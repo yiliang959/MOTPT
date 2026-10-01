@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v1",
+  "schema_version": "motpt-governance-v2",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -22,7 +22,7 @@
     "repository_is_authoritative": true,
     "chat_is_authority": false,
     "owner_releases_required_for": [
-      "RESEARCH_CONTRACT_FREEZE",
+      "G0_FINAL_RESEARCH_CONTRACT_FREEZE",
       "NEW_MODEL_GENERATION",
       "DATASET_SPLIT_OR_EVALUATION_CHANGE",
       "SCIENTIFIC_EXECUTION",
@@ -44,22 +44,39 @@
     "no_duplicate_latest_status_or_handoff_stack": true
   },
   "science": {
-    "research_hypothesis": "UNDEFINED__OWNER_DISCUSSION_PENDING",
-    "scientific_contract": "UNFROZEN",
-    "model_architecture": "NONE",
-    "training_objective": "NONE",
+    "research_hypothesis": "PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0",
+    "scientific_contract": "V0_CONCEPT_OWNER_ACCEPTED__NOT_G0_FROZEN",
+    "formulation": "ONLINE_MOT_AS_SEQUENTIAL_BELIEF_INFERENCE_WITH_MTP_AS_PREDICTIVE_OPERATOR",
+    "model_architecture": "MINIMAL_FOUR_OPERATION_DATAFLOW__NOT_FROZEN",
+    "training_objective": "NONE__TBD",
     "accepted_model": "NONE",
     "native_baseline": "MOTIP__PLANNED__NOT_YET_MOTPT_PARITY_VALIDATED",
     "candidate_upstream": "MCG-NJU/MOTIP@ffc0e905ac196a603027eca8d18fb0dff48c8bcc__CANDIDATE_NOT_FROZEN",
     "datasets_and_splits": "TBD__NO_EXPERIMENT_AUTHORITY",
+    "observation_horizon": "NO_FIXED_OBSERVATION_WINDOW__PERSISTENT_RECURSIVE_BELIEF",
+    "future_model": "MULTIMODAL_FUTURE_BELIEF__REPRESENTATION_TBD",
     "strictly_causal_online_as_default_research_guard": true,
     "gt_future_test_role": "NOT_MODEL_VISIBLE__EXPLICIT_CONTRACT_REQUIRED",
-    "cross_repo_scientific_conclusion_inheritance": false
+    "cross_repo_scientific_conclusion_inheritance": false,
+    "working_core_operations": [
+      "PERSISTENT_BELIEF",
+      "MTP_PREDICT_TRANSITION",
+      "ASSOCIATION_WITH_PREDICTIVE_BELIEF",
+      "OBSERVATION_ASSIMILATION_CORRECTION"
+    ],
+    "current_non_claims": [
+      "LATENT_STATE_ALONE_IS_NOT_NOVEL",
+      "OBJECT_PERMANENCE_ALONE_IS_NOT_NOVEL",
+      "MULTIMODAL_MTP_ALONE_IS_NOT_NOVEL",
+      "JOINT_MOT_MTP_ALONE_IS_NOT_NOVEL",
+      "BAYESIAN_FILTERING_ALONE_IS_NOT_NOVEL"
+    ]
   },
   "execution": {
-    "state": "HOLD__BOOTSTRAP_ONLY__AWAIT_OWNER_SCIENTIFIC_CONTRACT",
+    "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",
     "allowed_now": [
       "DOCS_AND_GOVERNANCE",
+      "LITERATURE_REVIEW",
       "PURE_CPU_STATIC_VALIDATION",
       "UNIT_TESTS_WITH_SYNTHETIC_INPUTS",
       "NO_DATASET_PROVENANCE_REVIEW"
@@ -83,12 +100,12 @@
   "workflow": {
     "research_unit": "ONE_ACTIVE_ISSUE_BRANCH_DRAFT_PR_PER_RESEARCH_GENERATION",
     "governance_workstream_may_be_separate": true,
-    "current_active_research_issue": null,
-    "current_active_research_branch": null,
+    "current_active_research_issue": 1,
+    "current_active_research_branch": "research/1-motpt-v0-formulation",
     "current_active_research_pr": null,
     "review": "GATE_BASED_NOT_PER_COMMIT",
     "gates": [
-      "G0_OWNER_T2_SCIENTIFIC_CONTRACT_FREEZE",
+      "G0_OWNER_T2_FINAL_SCIENTIFIC_CONTRACT_FREEZE",
       "G1_T3_IMPLEMENTATION_SELF_AUDIT_CPU_TESTS",
       "G2_OWNER_AUTHORIZED_PARITY_CANARY",
       "G3_SEPARATELY_AUTHORIZED_TRAIN_VAL",
@@ -112,7 +129,8 @@
     "labels": [
       "FACT",
       "SUPPORTED_INFERENCE",
-      "OPEN_HYPOTHESIS"
+      "OPEN_HYPOTHESIS",
+      "WORKING_FORMULATION"
     ],
     "same_observation_not_independent_replication": true,
     "oracle_labels_not_runtime_input": true,
