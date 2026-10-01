@@ -45,6 +45,7 @@ MOTPT/
 │   ├── RESEARCH.md
 │   ├── EVIDENCE.md
 │   ├── CURRENT.md
+│   ├── STRUCTURE.md
 │   ├── BASELINE.md
 │   ├── DIAGNOSTICS.md
 │   └── CROSS_REPO_REUSE.md
@@ -78,3 +79,12 @@ python -m unittest discover -s tests -v
 ## Literature survey
 
 The research-specific survey lives at [docs/literature/README.md](docs/literature/README.md). It includes a novelty/collision matrix and per-paper notes focused on what MOTPT can reuse and what it must do differently.
+
+
+## Repository discipline
+
+The stable repository contract is [docs/STRUCTURE.md](docs/STRUCTURE.md).
+
+Canonical Markdown is updated **in place**. Git provides history/diff/recovery; it is not a substitute for current project state. In particular, [docs/EVIDENCE.md](docs/EVIDENCE.md) is the single evidence ledger—do not create `EVIDENCE_v2.md`, per-run evidence files, dated status copies, or permanent run-result directory trees.
+
+Literature notes under `docs/literature/papers/` are the controlled exception because each distinct paper is an independent source.

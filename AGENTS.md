@@ -56,11 +56,21 @@ See `docs/CROSS_REPO_REUSE.md`. Never directly import TCR modules at MOTPT runti
 
 Port only minimal general utilities after reviewing exact source SHA, behavior/parity tests, license, dependencies and public-release risk. MOTPT is PUBLIC: exclude private annotations, personal/server paths, tokens, raw datasets, private evidence, checkpoints and large artifacts.
 
-## 8. Working-tree discipline
+## 8. Repository structure and knowledge discipline
 
-Use `motpt/` for reusable Python, `scripts/` for thin entrypoints, `tests/` for regressions and `docs/` for canonical knowledge.
+`docs/STRUCTURE.md` is the canonical repository-shape contract.
+
+Use the fixed top-level structure and update canonical Markdown **in place**. Git already preserves previous versions, so never create versioned/datetime/“latest” copies of `RESEARCH.md`, `CURRENT.md`, `EVIDENCE.md`, or other canonical docs.
+
+Scientific evidence has exactly one ledger: `docs/EVIDENCE.md`. A new run, gate, negative result, dataset comparison or adjudication updates an existing/new entry in that file. Do not create per-run/per-issue/per-epoch evidence Markdown or `docs/results/<run>/` trees. Raw artifacts stay outside Git and are referenced by immutable hash/manifest/path.
+
+The controlled exception is `docs/literature/papers/`: one note per distinct paper may be added, while the index and novelty matrix are still updated in place.
+
+Use `motpt/` for reusable Python, `scripts/` for thin entrypoints and `tests/` for regressions. Prefer adding files to existing approved namespaces rather than creating directories. New top-level paths or new canonical files under `docs/` require explicit Owner approval.
 
 Do not create model/training implementation before the final G0 contract and explicit implementation release. Research diagrams/pseudocode in `docs/RESEARCH.md` do not grant implementation permission.
+
+Issues/PRs coordinate work; they are not the current knowledge base. Any decision that survives review must be written back to the owning canonical Markdown file before closeout.
 
 ## 9. Stop conditions
 

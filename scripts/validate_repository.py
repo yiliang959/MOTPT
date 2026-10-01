@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
     "README.md", "AGENTS.md", "CLAUDE.md", "governance.json",
-    "docs/RESEARCH.md", "docs/EVIDENCE.md", "docs/CURRENT.md",
+    "docs/RESEARCH.md", "docs/EVIDENCE.md", "docs/CURRENT.md", "docs/STRUCTURE.md",
     "docs/BASELINE.md", "docs/DIAGNOSTICS.md", "docs/CROSS_REPO_REUSE.md",
     "motpt/__init__.py", "motpt/config/provenance.py", "motpt/data/mot_io.py",
     "motpt/diagnostics/schema.py", "motpt/evaluation/protocol.py",
@@ -61,6 +61,31 @@ def validate(root: Path = ROOT) -> list[str]:
 
     if not gov.get("cross_repository", {}).get("private_to_public_review_required"):
         errors.append("MISSING_PRIVATE_TO_PUBLIC_REVIEW")
+
+    layout = gov.get("repository_layout", {})
+    if layout.get("structure_state") != "FROZEN_V1__EXPAND_ONLY_BY_EXPLICIT_OWNER_DECISION":
+        errors.append("STRUCTURE_NOT_FROZEN")
+    evidence_policy = layout.get("evidence_policy", {})
+    if evidence_policy.get("canonical_ledger") != "docs/EVIDENCE.md" or not evidence_policy.get("one_file_only"):
+        errors.append("SINGLE_EVIDENCE_LEDGER_POLICY_MISSING")
+
+    docs_dir = root / "docs"
+    allowed_docs = set(layout.get("docs_canonical_files", []))
+    if docs_dir.is_dir():
+        actual_docs = {p.name for p in docs_dir.iterdir() if p.is_file()}
+        unexpected_docs = sorted(actual_docs - allowed_docs)
+        if unexpected_docs:
+            errors.append("UNAPPROVED_CANONICAL_DOCS:" + ",".join(unexpected_docs))
+
+        forbidden_tokens = ("EVIDENCE_", "EVIDENCE-", "evidence_", "evidence-", "_final.md", "_latest.md", "_new.md")
+        for path in docs_dir.rglob("*.md"):
+            rel = path.relative_to(root).as_posix()
+            if rel.startswith("docs/literature/papers/"):
+                continue
+            if any(token in path.name for token in forbidden_tokens):
+                errors.append("FORBIDDEN_VERSIONED_DOC:" + rel)
+            if rel.startswith("docs/results/"):
+                errors.append("FORBIDDEN_PER_RUN_EVIDENCE_TREE:" + rel)
 
     current = root / "docs/CURRENT.md"
     if current.is_file():

@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v2",
+  "schema_version": "motpt-governance-v3",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -41,7 +41,45 @@
       "ACTIVE_ISSUE_PR_IF_ANY"
     ],
     "canonical_update_in_place": true,
-    "no_duplicate_latest_status_or_handoff_stack": true
+    "no_duplicate_latest_status_or_handoff_stack": true,
+    "canonical_documents": {
+      "README.md": "entrypoint_and_stable_layout",
+      "docs/RESEARCH.md": "single_living_research_contract",
+      "docs/CURRENT.md": "single_current_control_plane",
+      "docs/EVIDENCE.md": "single_scientific_evidence_ledger",
+      "docs/BASELINE.md": "single_baseline_registry",
+      "docs/DIAGNOSTICS.md": "single_diagnostic_contract",
+      "docs/CROSS_REPO_REUSE.md": "single_cross_repo_policy",
+      "docs/STRUCTURE.md": "single_repository_structure_contract",
+      "docs/literature/README.md": "single_literature_index",
+      "docs/literature/NOVELTY_MATRIX.md": "single_literature_comparison_matrix"
+    },
+    "update_in_place_rules": [
+      "CURRENT_STATE_CHANGES_UPDATE_docs_CURRENT_md",
+      "RESEARCH_FORMULATION_CHANGES_UPDATE_docs_RESEARCH_md",
+      "SCIENTIFIC_EVIDENCE_CHANGES_UPDATE_docs_EVIDENCE_md",
+      "BASELINE_IDENTITY_CHANGES_UPDATE_docs_BASELINE_md",
+      "LITERATURE_COMPARISON_CHANGES_UPDATE_existing_literature_files",
+      "DO_NOT_CREATE_VERSIONED_BACKUP_OR_LATEST_MD_FILES",
+      "GIT_HISTORY_IS_HISTORY_NOT_A_PARALLEL_KNOWLEDGE_BASE"
+    ],
+    "forbidden_parallel_doc_patterns": [
+      "EVIDENCE_*.md",
+      "EVIDENCE-*.md",
+      "evidence_*.md",
+      "evidence-*.md",
+      "CURRENT_*.md",
+      "CURRENT-*.md",
+      "RESEARCH_*.md",
+      "RESEARCH-*.md",
+      "*_final.md",
+      "*_latest.md",
+      "*_new.md",
+      "*_v2.md",
+      "*_v3.md",
+      "handoff_*.md",
+      "status_*.md"
+    ]
   },
   "science": {
     "research_hypothesis": "PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0",
@@ -114,7 +152,9 @@
     ],
     "no_unreviewed_force_push_on_shared_branches": true,
     "delete_merged_workstream_branches": true,
-    "scientific_hypothesis_before_model_code": true
+    "scientific_hypothesis_before_model_code": true,
+    "issue_pr_role": "COORDINATION_REVIEW_AND_CHANGE_DISCUSSION_ONLY__CANONICAL_DECISIONS_MUST_BE_WRITTEN_BACK_TO_MD",
+    "git_role": "DIFF_HISTORY_PROVENANCE_AND_ERROR_RECOVERY__NOT_PROJECT_MEMORY"
   },
   "provenance": {
     "record_at_least": [
@@ -161,14 +201,56 @@
     "copy_only_minimal_independently_reviewed_files": true
   },
   "repository_layout": {
-    "roots": [
+    "structure_contract": "docs/STRUCTURE.md",
+    "structure_state": "FROZEN_V1__EXPAND_ONLY_BY_EXPLICIT_OWNER_DECISION",
+    "top_level_allowlist": [
+      ".github/",
       "docs/",
       "motpt/",
       "scripts/",
       "tests/",
-      "optional_external/"
+      "governance.json",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      ".gitignore"
     ],
-    "third_party": "PINNED_AND_LICENSE_REVIEWED_WHEN_ACTUALLY_REQUIRED",
+    "docs_canonical_files": [
+      "RESEARCH.md",
+      "CURRENT.md",
+      "EVIDENCE.md",
+      "STRUCTURE.md",
+      "BASELINE.md",
+      "DIAGNOSTICS.md",
+      "CROSS_REPO_REUSE.md"
+    ],
+    "docs_allowed_subtrees": [
+      "literature/"
+    ],
+    "literature_growth_rule": "ONE_NOTE_PER_DISTINCT_PAPER_IS_ALLOWED__NO_STATUS_OR_EVIDENCE_VERSION_STACK",
+    "motpt_namespace_allowlist": [
+      "config/",
+      "data/",
+      "diagnostics/",
+      "evaluation/",
+      "model/",
+      "runtime/"
+    ],
+    "reserved_namespaces_not_implementation_authority": [
+      "model/",
+      "runtime/"
+    ],
+    "prefer_file_in_existing_namespace_over_new_directory": true,
+    "new_top_level_or_docs_canonical_file_requires_owner": true,
+    "evidence_policy": {
+      "canonical_ledger": "docs/EVIDENCE.md",
+      "update_in_place": true,
+      "one_file_only": true,
+      "raw_artifacts_in_git": false,
+      "per_run_evidence_markdown": false,
+      "evidence_attachment_directory": false,
+      "artifact_reference_by_hash_manifest_or_external_path": true
+    },
     "never_commit_large_or_local": [
       "datasets/",
       "data/",
@@ -177,7 +259,6 @@
       "artifacts/",
       "logs/",
       ".project_storage/"
-    ],
-    "accepted_small_evidence": "docs/results/<workstream>/__T2_REVIEWED"
+    ]
   }
 }

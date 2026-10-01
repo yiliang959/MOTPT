@@ -10,7 +10,10 @@ CURRENT_RESEARCH_CONTRACT = V0_CONCEPT_OWNER_ACCEPTED__NOT_G0_FROZEN
 CURRENT_RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WORKING_V0
 CURRENT_ACCEPTED_MODEL = NONE
 BASELINE = MOTIP_PLANNED__NOT_MOTPT_VALIDATED
-CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS\nLITERATURE_LAYER = docs/literature/README.md__18_CORE_PAPERS
+CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS
+LITERATURE_LAYER = docs/literature/README.md__18_CORE_PAPERS
+STRUCTURE_POLICY = FROZEN_V1__CANONICAL_MD_UPDATE_IN_PLACE
+EVIDENCE_POLICY = SINGLE_LEDGER__docs/EVIDENCE.md
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -60,3 +63,17 @@ Until then, literature review, docs/governance edits and synthetic/static tests 
 ## Literature layer
 
 The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 18 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
+
+
+## Repository structure policy
+
+Repository shape is frozen by `docs/STRUCTURE.md`.
+
+Current rule:
+- canonical research/state/evidence documents are updated in place;
+- Git preserves old versions and is not a second project-memory system;
+- `docs/EVIDENCE.md` is the only scientific evidence ledger;
+- do not create evidence/status/handoff/version stacks;
+- raw experiment artifacts remain outside Git and are referenced by provenance;
+- new top-level or canonical `docs/` paths require explicit Owner approval;
+- literature paper notes are the controlled growth exception.
