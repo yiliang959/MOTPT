@@ -129,7 +129,7 @@ B_t^i = f(B_{t-1}^i,D_t,A_t),
 not an ever-growing raw sequence
 
 \[
-[O_1,\ldots,O_t]\rightarrow \text{one unbounded Transformer input}.
+[D_1,\ldots,D_t]\rightarrow \text{one unbounded Transformer input}.
 \]
 
 The desired property is:
@@ -245,10 +245,10 @@ It is not required in v0 to be the complete hidden-state transition function. It
 
 ### Module / Operation 4 — Joint Association and Belief Update
 
-For current observation \(z_t^j\), estimate association compatibility:
+At the next frame, candidate observation \(z_{t+1}^j\) is evaluated using both the persistent MOT state and the MTP predictive signal:
 
 \[
-p(A_t^{ij}\mid B_{t|t-1}^i,z_t^j).
+p(A_{t+1}^{ij}\mid B_t^i,q_t^i,z_{t+1}^j).
 \]
 
 The association mechanism may combine appearance/identity evidence with predictive likelihood or learned flow-belief compatibility.
@@ -256,10 +256,10 @@ The association mechanism may combine appearance/identity evidence with predicti
 After association:
 
 \[
-B_t^i = \mathcal{U}(B_{t|t-1}^i,z_t^j).
+B_{t+1}^i = \mathcal{U}(B_t^i,q_t^i,z_{t+1}^j,A_{t+1}^{ij}).
 \]
 
-If no usable observation is assigned, the predicted belief can persist subject to future existence/termination policy. That policy is not frozen in v0.
+If no usable observation is assigned, the track belief may continue using its previous state plus predictive signal, subject to the future existence/termination policy. That policy is not frozen in v0.
 
 ## 7. Working architecture sketch
 
