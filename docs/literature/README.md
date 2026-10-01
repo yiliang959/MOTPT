@@ -1,0 +1,77 @@
+# MOTPT Literature Survey
+
+**Last verified:** 2026-10-01  
+**Status:** living survey for Issue #1 / Draft PR #2  
+**Role:** supporting novelty analysis; it does not override `docs/RESEARCH.md` or `docs/EVIDENCE.md`.
+
+## Purpose
+
+This directory records papers most likely to overlap with, be confused with, or materially inform MOTPT. The goal is not paper count. Every note asks:
+
+> **What has already been solved, what can MOTPT reuse, and what must MOTPT do differently?**
+
+Current MOTPT target: a persistent object-specific latent-flow **predictive belief** in online MOT. MTP predicts multimodal futures from the current MOT state and returns a predictive signal to association/update; later observations should revise the same persistent future belief over time.
+
+## Taxonomy
+
+| Family | Established prior art | Not sufficient as MOTPT novelty |
+|---|---|---|
+| Bayesian filtering / data assimilation | predict → observe → posterior correction | sequential posterior updating |
+| Partial-observation latent dynamics | infer latent dynamics from incomplete samples | hidden continuous dynamics |
+| Object permanence | object state can persist without visibility | “unseen object still exists” |
+| Recurrent / SSM tracking | learned persistent motion state improves tracking | hidden motion state |
+| Joint MOT + MTP | tracking and prediction can be unified | “we combine MOT and MTP” |
+| Variable-observation MTP | prediction can accept changing history lengths | no fixed observation window |
+| Multimodal forecasting | future can be represented by modes/samples | K predicted trajectories |
+| Object-centric world models | stochastic per-object latent dynamics can be learned | object-centric latent dynamics |
+| **MOTPT target intersection** | not found as one standard formulation in this survey | persistent belief + MTP transition + correction + uncertain identity |
+
+## Paper index
+
+### Partial observations / Bayesian-like inference
+- [LG-ODE — NeurIPS 2020](papers/2020_neurips_lg_ode.md)
+- [SURGE — ICML 2026](papers/2026_icml_surge.md)
+
+### Object permanence / persistent state
+- [Learning Object Permanence from Video — ECCV 2020](papers/2020_eccv_object_permanence_video.md)
+- [Learning To Track With Object Permanence — ICCV 2021](papers/2021_iccv_permatrack.md)
+- [Random Walk along Memory — ICML 2022](papers/2022_icml_object_permanence_memory.md)
+- [Loci — ICLR 2023](papers/2023_iclr_loci.md)
+- [IMSETrack — ESWA 2026](papers/2026_eswa_imsetrack.md)
+
+### Joint tracking + future prediction
+- [PnPNet — CVPR 2020](papers/2020_cvpr_pnpnet.md)
+- [PF-Track — CVPR 2023](papers/2023_cvpr_pf_track.md)
+- [StreamMOTP — ACCV 2024](papers/2024_accv_streammotp.md)
+- [DreamTrack — CVPR 2025](papers/2025_cvpr_dreamtrack.md)
+- [DiffuTrack — Scientific Reports 2026](papers/2026_sci_rep_diffutrack.md)
+
+### Online / variable-observation MTP
+- [FLN — CVPR 2024](papers/2024_cvpr_fln.md)
+- [CLLS — CVPR 2025](papers/2025_cvpr_clls.md)
+- [TOTP — ICCV 2025](papers/2025_iccv_totp.md)
+
+### Object-centric / world dynamics
+- [SlotFormer — ICLR 2023](papers/2023_iclr_slotformer.md)
+- [DriveWorld — CVPR 2024](papers/2024_cvpr_driveworld.md)
+- [LPWM — ICLR 2026](papers/2026_iclr_lpwm.md)
+
+### Modern MOT motion reasoning
+- [HyperSSM — CVPR 2026](papers/2026_cvpr_hyperssm.md)
+- [Gated Temporal Fusion — WACV 2026](papers/2026_wacv_gated_temporal_fusion.md)
+- [Bayes-4DRTrack — IEEE IV 2025](papers/2025_iv_bayes_4drtrack.md)
+- [Sentinel — Scientific Reports 2026](papers/2026_sentinel_uncertainty_mot.md)
+
+## Priority
+
+**Must address directly:** DiffuTrack, SURGE, StreamMOTP, PF-Track, TOTP, HyperSSM, LPWM, LG-ODE, Bayes-4DRTrack, Gated Temporal Fusion.  
+**Prevents weak novelty claims:** PnPNet, PermaTrack, DreamTrack, SlotFormer, DriveWorld, IMSETrack, Sentinel.  
+**Design/evaluation lessons:** FLN, CLLS, object-permanence papers, Loci.
+
+## Working novelty boundary
+
+> The ingredients are individually established, including Bayesian uncertainty-aware MOT, learned motion prediction, multimodal motion hypotheses used for association, and temporal-memory improvements to MOTIP. The current open question is whether online MOT benefits from **identity-aware assimilation over a persistent object-specific stochastic latent-flow belief**, where multimodal MTP predictions feed back to MOT and subsequent observations explicitly refine the **same persistent future belief** rather than restarting a fixed-window predictor.
+
+This remains a **working research gap**, not a publication claim.
+
+See [NOVELTY_MATRIX.md](NOVELTY_MATRIX.md).
