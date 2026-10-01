@@ -11,12 +11,13 @@ CURRENT_RESEARCH_HYPOTHESIS = PERSISTENT_OBJECT_SPECIFIC_LATENT_FLOW_BELIEF__WOR
 CURRENT_ACCEPTED_MODEL = NONE
 BASELINE = MOTIP_PLANNED__NOT_MOTPT_VALIDATED
 CURRENT_TASK = REFINE_PROBLEM_NOVELTY_MODULES_AND_G0_REQUIREMENTS
-LITERATURE_LAYER = docs/literature/README.md__20_CORE_PAPERS
+LITERATURE_LAYER = docs/literature/README.md__22_CORE_PAPERS
 STRUCTURE_POLICY = FROZEN_V1__CANONICAL_MD_UPDATE_IN_PLACE
 EVIDENCE_POLICY = SINGLE_LEDGER__docs/EVIDENCE.md
 PRE_G0_REVIEW = PASS_WITH_FORMULATION_TIGHTENING__NO_EXECUTION_RELEASE
 OWNER_DIRECTION_20261001 = MOT_PRIMARY__MTP_FEEDBACK__2D_PROJECTED__FUTURE_BELIEF_REFINEMENT
 RETENTION_POLICY = OPEN__DATASET_DISTRIBUTION_STUDY_REQUIRED
+PRE_EXPERIMENT_NOVELTY_RISK = DIFFUTRACK_DIRECT_COLLISION__PERSISTENT_REFINEMENT_REQUIRED
 EXECUTION_STATE = HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION
 SCIENTIFIC_EXECUTION = PROHIBITED
 DATASET_CONSUMING_ANALYSIS = PROHIBITED
@@ -68,7 +69,7 @@ Until then, literature review, docs/governance edits and synthetic/static tests 
 
 ## Literature layer
 
-The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 20 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
+The active branch now contains a structured survey at `docs/literature/`: an index/taxonomy, a novelty collision matrix, a reusable paper-note template, and 22 per-paper extraction notes. These notes support Issue #1 and remain revisable as deeper reading changes the comparison.
 
 
 ## Repository structure policy

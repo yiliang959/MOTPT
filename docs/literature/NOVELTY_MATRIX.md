@@ -21,7 +21,9 @@
 | CLLS (CVPR'25) | ✓ | ~ | model-dependent | — | — | — | length-robust recurrent representation |
 | TOTP (ICCV'25) | ✓ | ~ | ✓ | ~ | — | — | online variable-observation MTP |
 | DreamTrack (CVPR'25) | ✓ | ~ | ✓ | ~ | SOT | ✓ (SOT) | multimodal future aids tracking |
+| DiffuTrack (Sci. Rep.'26) | short-history state | ✓ | ✓ | standard track update, not same-future refinement | ✓ | ✓ | conditional diffusion motion hypotheses directly used for MOT association |
 | HyperSSM (CVPR'26) | ✓ | ✓ | — | — | ✓ | ~ | learned state-space MOT motion |
+| Gated Temporal Fusion (WACV'26) | ✓ | ~ | — | — | ✓ | — | tracklet memory / temporal fusion improves MOTIP |
 | Bayes-4DRTrack (IV'25) | ✓ | ~ | uncertainty-aware | ~ | ✓ | ✓ | Transformer motion prediction + Bayesian uncertainty in MOT |
 | LPWM (ICLR'26) | ✓ | ~ | ✓ | ~ | — | — | object-centric stochastic dynamics |
 | SURGE (ICML'26) | ✓ | ✓ | ✓ | ✓ | — | — | observation-corrected forecast posterior |
@@ -36,6 +38,8 @@ Do **not** base MOTPT novelty solely on:
 - RNN/SSM/latent motion state;
 - long or variable observation history;
 - multimodal trajectory prediction;
+- conditional diffusion / distributional motion hypotheses used for data association;
+- adding temporal tracklet memory/fusion to MOTIP;
 - prediction improving tracking;
 - joint MOT + MTP training;
 - object-centric latent dynamics;
@@ -59,12 +63,14 @@ The four parts should not be independent heads. One persistent belief should pre
 
 ## Highest-risk nearest neighbors
 
+- **DiffuTrack:** closest direct MOT collision on multimodal motion hypotheses → association; MOTPT must show persistent longitudinal belief/refinement beyond fixed-length history-conditioned hypotheses.
 - **SURGE:** closest prediction/correction semantics; MOTPT must add ambiguous identity association.
 - **StreamMOTP:** closest streaming joint MOT + MTP; MOTPT needs explicit belief semantics and posterior revision.
 - **PF-Track:** closest future-prediction-to-reassociation mechanism.
 - **TOTP:** closest online multimodal MTP with variable observations; lacks MOT identity inference.
 - **LPWM:** closest object-centric stochastic latent dynamics; lacks standard MOT association focus.
 - **HyperSSM / IMSETrack:** strongest warning against renaming a recurrent/SSM hidden state as latent flow.
+- **Gated Temporal Fusion:** directly shows MOTIP still gains from stronger temporal memory; MOTPT must outperform/explain beyond generic temporal fusion.
 - **Bayes-4DRTrack:** blocks a novelty claim based only on learned nonlinear motion prediction + Bayesian uncertainty inside MOT.
 - **Sentinel:** blocks a novelty claim based only on per-track uncertainty state driving association/lifecycle.
 

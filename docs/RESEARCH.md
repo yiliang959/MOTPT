@@ -417,3 +417,18 @@ The following v0 directional decisions are now fixed for the ongoing G0 discussi
 6. **History/retention:** do not freeze a fixed history or track-retention limit yet. First measure dataset track/gap/reappearance distributions under a separately authorized diagnostic, then choose the retention policy.
 
 These decisions narrow the research direction but still do not constitute final G0 architecture/training/evaluation freeze.
+
+
+### Critical nearest-neighbor update — DiffuTrack
+
+A 2026 online MOT work, **DiffuTrack**, already uses conditional diffusion to generate distributional/multimodal motion hypotheses from track history and feeds those hypotheses directly into data association. This materially tightens the novelty boundary.
+
+Therefore MOTPT must **not** claim the following as sufficient novelty:
+
+- probabilistic/multimodal motion prediction for MOT;
+- multiple future hypotheses instead of one Kalman/point prediction;
+- future-distribution support used for association.
+
+The remaining research burden is stronger: the project must demonstrate a **persistent longitudinal belief** that is observation-updated across the track lifetime, whose belief about the **same future target** can be measured as it refines, and whose persistent identity state is coupled to that refinement.
+
+A fixed-window multimodal motion predictor without those properties should be treated as a baseline/control, not the final MOTPT contribution.

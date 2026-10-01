@@ -10,7 +10,7 @@ This directory records papers most likely to overlap with, be confused with, or 
 
 > **What has already been solved, what can MOTPT reuse, and what must MOTPT do differently?**
 
-Current MOTPT target: a persistent object-specific latent-flow **belief** in online MOT, with MTP as its predictive transition operator, predictive belief participating in association, and later observations revising multimodal future belief.
+Current MOTPT target: a persistent object-specific latent-flow **predictive belief** in online MOT. MTP predicts multimodal futures from the current MOT state and returns a predictive signal to association/update; later observations should revise the same persistent future belief over time.
 
 ## Taxonomy
 
@@ -44,6 +44,7 @@ Current MOTPT target: a persistent object-specific latent-flow **belief** in onl
 - [PF-Track — CVPR 2023](papers/2023_cvpr_pf_track.md)
 - [StreamMOTP — ACCV 2024](papers/2024_accv_streammotp.md)
 - [DreamTrack — CVPR 2025](papers/2025_cvpr_dreamtrack.md)
+- [DiffuTrack — Scientific Reports 2026](papers/2026_sci_rep_diffutrack.md)
 
 ### Online / variable-observation MTP
 - [FLN — CVPR 2024](papers/2024_cvpr_fln.md)
@@ -57,18 +58,19 @@ Current MOTPT target: a persistent object-specific latent-flow **belief** in onl
 
 ### Modern MOT motion reasoning
 - [HyperSSM — CVPR 2026](papers/2026_cvpr_hyperssm.md)
+- [Gated Temporal Fusion — WACV 2026](papers/2026_wacv_gated_temporal_fusion.md)
 - [Bayes-4DRTrack — IEEE IV 2025](papers/2025_iv_bayes_4drtrack.md)
 - [Sentinel — Scientific Reports 2026](papers/2026_sentinel_uncertainty_mot.md)
 
 ## Priority
 
-**Must address directly:** SURGE, StreamMOTP, PF-Track, TOTP, HyperSSM, LPWM, LG-ODE, Bayes-4DRTrack.  
+**Must address directly:** DiffuTrack, SURGE, StreamMOTP, PF-Track, TOTP, HyperSSM, LPWM, LG-ODE, Bayes-4DRTrack, Gated Temporal Fusion.  
 **Prevents weak novelty claims:** PnPNet, PermaTrack, DreamTrack, SlotFormer, DriveWorld, IMSETrack, Sentinel.  
 **Design/evaluation lessons:** FLN, CLLS, object-permanence papers, Loci.
 
 ## Working novelty boundary
 
-> The ingredients are individually established, including Bayesian uncertainty-aware MOT and learned motion prediction. The current open question is whether online MOT benefits from **identity-aware assimilation over a persistent object-specific stochastic latent-flow belief**, where learned multimodal MTP is the predictive transition mechanism, ambiguous unlabeled observations are associated using that predictive belief, and later observations explicitly revise the same future belief.
+> The ingredients are individually established, including Bayesian uncertainty-aware MOT, learned motion prediction, multimodal motion hypotheses used for association, and temporal-memory improvements to MOTIP. The current open question is whether online MOT benefits from **identity-aware assimilation over a persistent object-specific stochastic latent-flow belief**, where multimodal MTP predictions feed back to MOT and subsequent observations explicitly refine the **same persistent future belief** rather than restarting a fixed-window predictor.
 
 This remains a **working research gap**, not a publication claim.
 

@@ -1,5 +1,5 @@
 {
-  "schema_version": "motpt-governance-v5",
+  "schema_version": "motpt-governance-v6",
   "project_id": "MOTPT",
   "repository": "yiliang959/MOTPT",
   "generation": 1,
@@ -121,7 +121,15 @@
     "retention_policy": "OPEN__MEASURE_TRACK_LIFETIME_MISSING_GAP_REAPPEARANCE_BEFORE_FREEZE",
     "no_fixed_observation_window": true,
     "unlimited_raw_history_assumption": false,
-    "mtp_as_complete_state_transition_required": false
+    "mtp_as_complete_state_transition_required": false,
+    "critical_nearest_neighbor": "DIFFUTRACK_2026__MULTIMODAL_MOTION_HYPOTHESES_FOR_ASSOCIATION",
+    "novelty_required_beyond_diffutrack": [
+      "PERSISTENT_LIFETIME_BELIEF",
+      "OBSERVATION_ASSIMILATION",
+      "SAME_FUTURE_BELIEF_REFINEMENT",
+      "IDENTITY_BELIEF_COUPLING"
+    ],
+    "required_temporal_control": "MOTIP_PLUS_GENERIC_TEMPORAL_MEMORY_FUSION__GTF_LIKE"
   },
   "execution": {
     "state": "HOLD__G0_DISCUSSION_ONLY__NO_SCIENTIFIC_EXECUTION",
